@@ -1,3 +1,56 @@
+This is an open source project under license \cite{gplv3}. \\
+
 \chapter{Introduction}
 
-Este proyecto es software libre, y está liberado con la licencia \cite{gplv3}.
+Sign or signed languages are complete natural languages that are expressed visually.
+They have their own grammar and lexicon and they are not universal. \\ 
+
+Sign languages have became the main way of communicating between deaf and dumb people. Nevertheless,
+it is not common in society to be able to understand them, so the gap between these communities
+and the rest of society have increased since years. \\
+
+As a future Software Engineer, I have a big social responsability, because my developments and ideas
+may help minorities and lessen gaps like this one. \\
+
+Solutions such as a videocall application, that subtitles sign languages, could make sign language 
+speakers be able to communicate with non-signers.
+Although there are a lot of dictionaries and applications to learn sign language, there is an 
+absence of applications that verify how you perform signing.
+Learning sign language would be easier and more accessible if you would not need someone to do this verification,
+and devices are now able to do this.
+
+\section{Preliminar analysis. Viability study.}
+
+In order to create an application to verify a signs or a videocall app, 
+translating signs into text would be neccessary. \\
+
+Past works have their main focus in translating signs into text using special gloves. Although this is effective 
+and would solve the problem, not everyone could afford these gloves, and the entrance to sign would be so expensive 
+that people would not feel attracted to this field. \\
+
+The most accessible hardware for users would be the integrated cameras in their phones and pc's. Therefore,
+the main objective of this initial study would be to analyse the efficiency and viability of translating 
+a video into text without any complex hardware.
+
+\subsection{Sign language characteristics}
+The first thing that comes into mind is to develop a deep learning model able to translate signed sentences into 
+text. Firstly, we should know the difficulties that this would take:
+\begin{itemize}
+    \item In order to be able to translate a signed sentence into text, the model should understand the context to formulate the sentence correctly.
+    \item Some words are signed the same way.
+    \item Signs are performed differently if you are left-handed or right-handed.
+    \item The dataset should contain videos of people from different ethnics, sex, race, etc signing, as it should be used by everyone.
+\end{itemize}
+
+Just analysing the alphabet would be much easier, as all letters are signed statically (in ASL: American Sign Language), except two.
+Therefore, a classification deep learning model could be developed and validate the images/videos from the user.
+Nevertheless, this has not that relevance, as it has already been developed and implemented by some applications such as Snapchat.
+
+\subsection{Literature review}
+
+\subsection{Solution to implement's selection}
+As I found in the literature a good dataset of American Sign Language, my investigation will use this dataset. \\
+
+A videocall application, or integrating a model into an existing application such as Jitsi, would be a very hard task due to my lack of knowledge in the deep learning field and that I don't really know if the model will perform correctly. \\ 
+
+As I found an existing and pretrained model that translates videos of people signing into text, I would opt to do an application to learn American Sign Language. I would integrate this model in the application so that the user can sign and the app automatically verifies if the sign is performed correctly.
