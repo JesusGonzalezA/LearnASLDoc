@@ -17,12 +17,14 @@
 \usepackage[gen]{eurosym} %para incluir el símbolo del euro
 \usepackage{cite} %para incluir citas del archivo <nombre>.bib
 \usepackage{enumerate}
+\usepackage{enumitem}
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{tabularx}
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{longtable}
+\usepackage{hyperref}
 
 \usepackage[table,xcdraw]{xcolor}
 \hypersetup{
@@ -76,20 +78,17 @@
 
 	% Descripción del problema y hasta donde se llega
 	\input{secciones/02_descripcion}
-
-	% Estado del arte
-	% 	1. Crítica al estado del arte
-	% 	2. Propuesta
-	\input{secciones/03_estado_del_arte}
 	
 	% Análisis del problema
 	% 1. Análisis de requisitos
 	% 2. Análisis de las soluciones
 	% 3. Solucion propuesta
 	% 4. Análisis de seguridad
-	\input{secciones/04_analisis}
+	\input{secciones/03_analisis}
 
-	\input{secciones/05_planificacion}
+	\input{secciones/04_planificacion}
+
+	\input{secciones/05_design}
 
 	% Desarrollo bajo sprints: 
 	% 	1. Permitir registros y login de usuarios

@@ -1,0 +1,185 @@
+\chapter{Analysis}
+
+\section{Objectives}
+The main objectives of the app to be developped, thinking of them as high-level requisites, are the following ones: 
+
+\begin{enumerate}[label=\textbf{Obj\_\arabic*:}, align=left, leftmargin=*]
+    \item The system will manage and keep all the information related to users, such as their credentials, done tests and stats.
+    \item The system will update the users' stats automatically after every done test. 
+    \item The system will allow the users to manage their account.
+    \item The system will allow the users to read their stats and done tests.
+    \item The system will manage the tests, being capable of creating them every time a user request to start one.
+    \item The system will store the videos of the users signing and will manage its visibility (to hide the videos to other users so that privacy is achieved).
+\end{enumerate}
+
+\section{Requirements}
+\subsection{Functional requirements}
+\begin{enumerate}[label=\textbf{RF\_\arabic*}, align=left, leftmargin=*]
+    \item Users management:
+        \begin{enumerate}[label=\textbf{\theenumi.\arabic*}, align=left, leftmargin=*]
+            \item The system will allow a non registered user be signed up in the the system.
+            \item The system will store all the information relative to the user in order to be able to identify them before entering the app.
+            \item The system will allow a registered user and identified to delete their account and information.
+        \end{enumerate}
+    \item Tests management: 
+        \begin{enumerate}[label=\textbf{\theenumi.\arabic*}, align=left, leftmargin=*]
+            \item The system will be able to generate all different types of tests:
+                \begin{itemize}
+                    \item \textit{Mimic tests}
+                    \item \textit{QA tests}
+                    \item \textit{Option tests}
+                        \begin{itemize}
+                            \item \textit{Word to video test}
+                            \item \textit{Video to word test}
+                        \end{itemize}
+                    \item \textit{Error test} variant from all the tests above
+                \end{itemize}
+            \item The system will be able to generate tests depending on the difficulty level. The difficulty will be \textit{EASY}, \textit{MEDIUM} and \textit{HARD}, depending on the selected dataset, \textit{WLASL300},  \textit{WLASL1000},  \textit{WLASL2000} respectively.
+            \item The system will allow the user to review an already done test and its results.
+            \item The system will protect the review of tests, so that only the user who did the test is able to review it.
+            \item The system will allow the user to delete all the done tests.
+        \end{enumerate}
+    \item Analytics management: The system will create stats from the tests done by the user until the moment the stats are required.
+        \begin{enumerate}[label=\textbf{\theenumi.\arabic*}, align=left, leftmargin=*]
+            \item The system will create stats and display diagrams from the following topics:
+                \begin{enumerate}
+                    \item Success percent.
+                    \item Percent of learnt words.
+                    \item Days the user has started a test in the app.
+                    \item New learnt words.
+                \end{enumerate}
+            \item The system will allow the user to filter the stats by difficulty and date.
+        \end{enumerate}
+\end{enumerate}
+
+\subsection{Non-Functional requirements}
+\begin{enumerate}[label=\textbf{RNF\_\arabic*}, align=left, leftmargin=*]
+    \item \textbf{Open source:} The application should be open source, due to its social interest.
+    \item \textbf{Accessibility: } The application should be accesible. Therefore, a well-tested UI library should be used and there will be no action that depends on sounds.
+    \item \textbf{Usability:} The application should be responsive.
+    \item \textbf{Maintenability:} The application core should be under a clean architecture, so that the maintenance of the application is guaranteed to be an easier task.
+    \item \textbf{Testability:} The main core of the application should be tested using unit tests.
+    \item \textbf{Privacy:} The application will require authorization and authentication in order to let a user interact with the system. The user will only be granted to access their own resources.
+\end{enumerate}
+
+\section{User's stories}
+In order to write the stories and follow their development, I created a project in GitHub. You can access it here \url{https://github.com/JesusGonzalezA/LearnASL/projects/3}. \\
+
+I divided the user stories in three main categories, according to the Functional Requirements:
+\begin{enumerate}[label=\textbf{US\_\arabic*}, align=left, leftmargin=*]
+    \item \textbf{User management} 
+        \begin{enumerate}[label=\textbf{\theenumi.\arabic*}, align=left, leftmargin=*]
+            \item As a non signer, I want to register in the app to learn American Sign Language.
+            \item As an user, I want to login in the app.
+            \item As an user, I want to change my password.
+            \item As an user, I want to delete my account.
+            \item As an user who does not remember their password, I want to be able to recover my account.
+            \item As an already registered user, I want to update my email.
+        \end{enumerate}
+    \item \textbf{Test management} 
+        \begin{enumerate}[label=\textbf{\theenumi.\arabic*}, align=left, leftmargin=*]
+            \item As an user, I want to start a new test.
+            \item As an user, I want to select the difficulty of a test.
+            \item As an user, I want to customize the number of questions of a test.
+            \item As an user, I want to know my result in the test.
+            \item As an user, I want to see in which question I am on.
+            \item As an user, I want to review a test done in the past.
+            \item As a user, I want to see a list with all the tests I've made.
+        \end{enumerate}
+    \item \textbf{Stats management}
+        \begin{enumerate}[label=\textbf{\theenumi.\arabic*}, align=left, leftmargin=*]
+            \item As an user, I want to select the interval of time of my stats.
+            \item As an user, I want to review my stats.
+            \item As an user, I want to delete my history of tests.
+        \end{enumerate}
+\end{enumerate}
+
+\subsection{Milestones}
+Each milestone represents a group of user stories that can be grouped in order to present a value increase. The objective of define the milestones is that, due to the fact that I am not going to work full-time on the project, I cannot organize review meetings and fixed deadlines. This way, I can get feedback from every milestone's completion until the final product is achieved. \\
+
+\begin{enumerate}[label=\textbf{MIL\_\arabic*}, align=left, leftmargin=*]
+    \item Project set up
+        \begin{enumerate}[label=\textbf{\theenumi.\arabic*}, align=left, leftmargin=*]
+            \item Both backend and frontend projects are initialized.
+            \item The test and production environments are set up.
+            \item The project is containerized.
+            \item The Github actions are prepared.
+        \end{enumerate}
+    \item Authentication
+        \begin{enumerate}[label=\textbf{\theenumi.\arabic*}, align=left, leftmargin=*]
+            \item A user can register/login/log out/sign off/change password/change email. Refers to \textit{US\_1}.
+            \item There are private/public routes and screens.
+        \end{enumerate}
+    \item The app is designed
+        \begin{enumerate}[label=\textbf{\theenumi.\arabic*}, align=left, leftmargin=*]
+            \item A good Readme is created.
+            \item Figma \cite{Figma} Low-Fidelity design.
+            \item Figma \cite{Figma} High-Fidelity design.
+        \end{enumerate}
+    \item A web version of the app is avalaible
+        \begin{enumerate}[label=\textbf{\theenumi.\arabic*}, align=left, leftmargin=*]
+            \item React version of the application with faked data.
+        \end{enumerate}
+    \item The app can create tests
+        \begin{enumerate}[label=\textbf{\theenumi.\arabic*}, align=left, leftmargin=*]
+            \item The app can create tests. Refers to \textit{US\_2.1}.
+            \item The user can upload a video. Refers to \textit{US\_2}.
+            \item The user can start a new test. Refers to \textit{US\_2.1}.
+        \end{enumerate}
+    \item The app saves info
+        \begin{enumerate}[label=\textbf{\theenumi.\arabic*}, align=left, leftmargin=*]
+            \item A user can crud information about themselves. Refers to \textit{US\_1, US\_2, US\_3}.
+            \item A user can watch past tests. Refers to \textit{US\_2.4, US\_2.6}.
+            \item A user can delete old tests. Refers to \textit{US\_3.3}.
+        \end{enumerate}
+    \item Graphical stats
+        \begin{enumerate}[label=\textbf{\theenumi.\arabic*}, align=left, leftmargin=*]
+            \item The user can see the data in a graphical way. Refers to \textit{US\_3.1, US\_3.2}.
+        \end{enumerate}
+    \item The app validates the videos
+        \begin{enumerate}[label=\textbf{\theenumi.\arabic*}, align=left, leftmargin=*]
+            \item The app validates the videos. Refers to \textit{US\_2}.
+            \item The user is able to see the result of the test.  Refers to \textit{US\_2.4, US\_2.6, US\_2.7}.
+        \end{enumerate}
+    \item Migrating to React Native or PWA
+    \item Using custom Deep Learning model or improving the existing one
+\end{enumerate}
+  
+\section{Tool's selection}
+The main reason why I chosed these technologies is because they would allow me to develop the application and I've already some experience with them. \\ 
+
+This way, I could minimize the risk of the development process and get the first MVP as soon as possible. \\
+
+In addition, all technologies are standards in industry and learning more about them will allow me to fit better in the market. \\ 
+
+Although I have more experience using other technologies, as they are requirements in the degree, I beleive this stack fits better my neccessities and are better adapted to this type of development.
+
+\begin{table}[h]
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{|p{3cm}|p{2cm}|p{4cm}|p{2cm}|p{4cm}|}
+        \cline{1-5} Type & Tool & Description & Experience & Reason to choose it       \\
+        \hline \multirow{5}{*}{Version control}   & Git     & Program to manage the different versions of a directory   & Y & Standard and experience \\
+        \cline{2-5}                               & GitHub  & To host my git repository                                 & Y & Standard, experience and ability to use GitHub's projects and CI tools \\
+        \hline \multirow{5}{*}{Backend}   & ASP.NET core   & C-Sharp framework to create REST API & Y & Standard and experience \\
+        \cline{2-5}                       & Flask          & Python framework to create REST API  & N & Standard and ease to integrate with PyTorch \\
+        \hline \multirow{5}{*}{Frontend}  & React.js    & Javascript library used to create SPA applications & Y & Standard and experience \\
+        \cline{2-5}                       & Typescript  & Programming language                               & Y & Standard, experience, typed language \\
+        \hline \multirow{5}{*}{Testing}  & xUnit    & Library to test ASP.NET applications & N & I had a project from Vilnius University where I had to use it and it was a recommendation of my teacher \\
+        \cline{2-5}                      & Postman  & Application to do API calls, load tests, simple unit tests and integration tests to REST APIs & Y & There is a new feature that I want to try \\
+        \cline{2-5}                      & Chai.js  & Library to do javascript tests. & N & Legacy by Postman \\
+        \hline \multirow{5}{*}{Documentation}  & Draw.io    & Web application to design graphs and diagrams & Y & It does not need any license and it is intuitive \\
+        \cline{2-5}                      & Swagger  & library to document the endpoints of the application & Y & I prefer it rather than using other's such as Postman due to its integration in the language \\
+        \cline{2-5}                      & GitHub projects  & In order to do my planification, set up my sprints and follow the development process & Y & I'm already using GitHub \\
+        \hline \multirow{5}{*}{Database}  & Microsoft SQL Server &  DBMS from Microsoft & Y & Experience and ease to integrate with ASP.NET Core \\
+        \cline{2-5}                      & Entity framework  & ORM to work with databases for .NET applications & Y & Experience, standard, documentation and good integration \\
+        \cline{2-5}                      & Azure data studio  & Program to connect to an existing DB, execute SQL statements, edit tuples... & Y & I prefer to work from a GUI \\
+        \hline \multirow{5}{*}{Styling}  & Figma & Application to design mockups and high fidelity projects & Y & Standard, experience and easy to use \\
+        \cline{2-5}                      & Material.ui & components library from Google & N & They take accessibility into account, it is stable and good looking \\
+        \hline \multirow{5}{*}{CI}  & Microsoft SQL Server &  DBMS from Microsoft & Y & Experience and ease to integrate with ASP.NET Core \\
+        \hline
+    \end{tabular}
+    }
+\caption{Tool's selection analysis}
+\label{table:analysis_tools_selection}
+\end{table}

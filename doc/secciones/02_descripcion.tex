@@ -20,6 +20,24 @@ This way, the user would be able to do tests. In these tests the user would be a
     \item \textbf{A video:} The user would select the word that matches.
 \end{itemize}
 
+\subsection{Types of tests}
+The application will be able to generate different types of tests:
+\begin{itemize}
+    \item \textbf{Option tests:}
+        \begin{itemize}
+            \item \textbf{Word to video test:} the user will be asked a word. The user will have to select the video that matches that word.
+            \item \textbf{Video to word test:} the user will be asked a video. The user will have to select the word that matches that video.
+        \end{itemize}
+    \item \textbf{QA tests:} the user will be asked to sign a word. The user will upload a video to the application and it will be validated by the system.
+    \item \textbf{Mimic tests:} the user will be asked to sign a word. Unlike 'QA tests', the user will be shown a helper video too, so that the user just have to imitate the video and upload it to the application in order to be validated.
+\end{itemize}
+
+These tests will be again splitted into two main types:
+\begin{itemize}
+    \item \textbf{Error tests:} the tests are formed with words that were incorrectly replied by the user. Once the user reply the asked word correctly, the word won't appear in an error test until the user fails again.
+    \item \textbf{Normal tests:} the tests are formed with all the words.
+\end{itemize}
+
 \subsection{Requisites of the application}
 \begin{itemize}
     \item Internet connection.
@@ -27,7 +45,4 @@ This way, the user would be able to do tests. In these tests the user would be a
     \item An email account is required.
 \end{itemize}
 
-\section{Objectives}
-
-\section{User stories}
 
