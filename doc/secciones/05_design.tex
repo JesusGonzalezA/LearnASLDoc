@@ -36,7 +36,7 @@ gain space in the screen. \\
 \subsubsection{Authorization}
 These screens just show the initial pages of the application. In order to be used, being logged in is needed, so the user should be firstly registered and then signed in to start a new session.\\
 
-They satify: \textit{RF\_1.1} and \textit{RF\_1.2}. \\
+orify: \textit{RF\_1.1} and \textit{RF\_1.2}. \\
 \begin{figure}[H]
     \centering
     \begin{subfigure}[T]{0.49\textwidth}
@@ -173,7 +173,7 @@ The second screen shows more information about the app to the user: \textbf{time
 
 The third screen show another way of representing the stats, in a more detailed way using graphs. \\
 
-They satify: \textit{RF\_3.1} and \textit{RF\_3.2}. \\
+orify: \textit{RF\_3.1} and \textit{RF\_3.2}. \\
 \begin{figure}[H]
     \centering
     \begin{subfigure}[T]{0.32\textwidth}
@@ -209,7 +209,24 @@ This screen allow the user to customize the application and change personal info
     \label{fig:design_user}
 \end{figure}
 
+\subsubsection{Navigation}
+In this figure we can see how a user would interact with every screen and the navigation between all of them. \\
 
+Firstly, there is a first layer that the user has to pass, which is the auth layer. In order to use the rest of the application (private routes), the user \\
+should sign in the application. \\
+
+Secondly, there is a row containing the main screens of the application. Using the \textbf{bottom bar} the user is able to move from one to another. \\
+
+Finally, we see all the rest of the subpages of the application, that contains more detailed information or actions. Among them we can see more in-detail stats \\
+or doing/reviewing quizes.
+If we take a look into the quiz ramification, we see a use case: create a test and do it. The user first customize the quiz, selecting the difficulty, number of questions and type of quiz. Then the user reply to the questions of the quiz itself and then the user is able to see the quiz result.\\
+
+\begin{figure}[H]
+    \centering
+        \includegraphics[width=\textwidth]{assets/lofi.png}
+    \caption{Low-fidelity design}
+    \label{fig:design_lofi}
+\end{figure}
 
 \subsection{High fidelity design}
 
