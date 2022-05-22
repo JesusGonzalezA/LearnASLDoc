@@ -1,11 +1,65 @@
 \chapter{Implementation}
 
 \section{Review of design diagrams}
-\subsection{Entities diagrams}
-\subsection{Interfaces diagrams}
-\subsection{Middleware diagram}
-\subsection{In depth}
-\subsubsection{Unit of work}
-\subsection{Abstract factory}
+    \subsection{Entities diagrams}
+    \subsection{Interfaces diagrams}
+    \subsection{Middleware diagram}
+    \subsection{In depth}
+        \subsubsection{Unit of work}
+    \subsection{Abstract factory}
 \section{Sequence diagram, use case: \textit{Get a test}}
 \section{Sequence diagram, use case: \textit{Delete a test}}
+\section{Backend code documentation}
+    \subsection{Architecture}
+        \subsubsection{How to orgnanize the project}
+        \subsubsection{Dependency injection}
+            \paragraph{Lifetime of an object}
+    \subsection{Storing secrets}
+        \subsubsection{Options pattern}
+        \subsubsection{Microsoft's development implementation: User secrets}
+        \subsubsection{Moving into a production environment}
+    \subsection{Using extension methods to clean startup method}
+    \subsection{Entity framework}
+        \subsubsection{Code first}
+        \subsubsection{Entity}
+        \subsubsection{Automatically tracking entities through events}
+        \subsubsection{Repository pattern}
+        \subsubsection{Unit of work pattern}
+    \subsection{Error handling middleware}
+        \subsubsection{Custom exceptions}
+        \subsubsection{Logger}
+    \subsection{Filters: automatic validation}
+        \subsubsection{Using attributes}
+        \subsubsection{Using validators}
+    \subsection{Mapping}
+        \subsubsection{Why using DTOs?}
+        \subsubsection{Automapper}
+    \subsection{Security}
+        \subsubsection{Hashing passwords}
+        \subsubsection{JWT tokens}
+        \subsubsection{Configuring CORS}
+    \subsection{Email service}
+    \subsection{Pagination}
+        \subsubsection{Why implementing pagination?}
+        \subsubsection{How to implement pagination?}
+    \subsection{Health check of the API}
+    \subsection{Documenting the API with code using Swagger}
+    \subsection{EXTRA: variant/invariant problem. How did I solve it?}
+
+\section{Frontend code documentation}
+    \subsection{Organization of the project}
+    \subsection{Redux pattern}
+    \subsection{Private VS public routes}
+    \subsection{Intelligent forms using Formik}
+        \subsubsection{Custom component to integrate Material UI and Formik}
+    \subsection{Persisting the data}
+
+\section{AI service code documentation}
+    \subsection{API keys}
+    \subsection{Protecting the API using JWT}
+    \subsection{Validating the videos}
+    \subsection{Initializing the model}
+    \subsection{Executing the model}
+        \subsection{Video transformations}
+    \subsection{Example}
+    
