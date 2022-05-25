@@ -53,6 +53,67 @@
 \titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\Huge\bfseries}
 \setcounter{secnumdepth}{4}
 \usepackage[Lenny]{fncychap}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\usepackage{listings}
+\renewcommand\lstlistlistingname{List of Code}
+\lstset{%
+basicstyle=\ttfamily\color{black},
+commentstyle = \ttfamily\color{red},
+keywordstyle=\ttfamily\color{blue},
+stringstyle=\color{orange}}
+\lstdefinelanguage{CSharp}
+{
+ morecomment = [l]{//}, 
+ morecomment = [l]{///},
+ morecomment = [s]{/*}{*/},
+ morestring=[b]", 
+ breaklines=true,
+ sensitive = true,
+ morekeywords = {abstract,  event,  new,  struct,
+   as,  explicit,  null,  switch,
+   base,  extern,  object,  this,
+   bool,  false,  operator,  throw,
+   break,  finally,  out,  true,
+   byte,  fixed,  override,  try,
+   case,  float,  params,  typeof,
+   catch,  for,  private,  uint,
+   char,  foreach,  protected,  ulong,
+   checked,  goto,  public,  unchecked,
+   class,  if,  readonly,  unsafe,
+   const,  implicit,  ref,  ushort,
+   continue,  in,  return,  using,
+   decimal,  int,  sbyte,  virtual,
+   default,  interface,  sealed,  volatile,
+   delegate,  internal,  short,  void,
+   do,  is,  sizeof,  while,
+   double,  lock,  stackalloc,   
+   else,  long,  static,   
+   enum,  namespace,  string,
+   from, where, select, group, into, orderby, 
+	join, let, in, on, equals, by, ascending, descending
+   },
+}
+
+% Listado definido para JSON
+% http://tex.stackexchange.com/questions/83085/how-to-improve-listings-display-of-json-files/83100#83100
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{punct}{red!60!black}
+
+\lstdefinelanguage{json}{
+	basicstyle=\footnotesize,
+	breaklines=true,
+	showstringspaces=false,
+	literate=
+		*{:}{{{\color{punct}{:}}}}{1}
+		{,}{{{\color{punct}{,}}}}{1}
+	    {\{}{{{\color{delim}{\{}}}}{1}
+	    {\}}{{{\color{delim}{\}}}}}{1}
+	    {[}{{{\color{delim}{[}}}}{1}
+	    {]}{{{\color{delim}{]}}}}{1}
+	    {ñ}{{\~{n}}}{1}
+}
 
 
 \begin{document}
@@ -70,10 +131,15 @@
 	% Índice de imágenes y tablas
 	\newpage
 	\listoffigures
+	
+	% Índice de códigos
+	\newpage
+	\lstlistoflistings
 
 	% Si hay suficientes se incluirá dicho índice
 	\listoftables 
 	\newpage
+
 
 	% Introducción 
 	\input{secciones/01_introduccion}

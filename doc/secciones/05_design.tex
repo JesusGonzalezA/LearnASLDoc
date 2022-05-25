@@ -1,11 +1,49 @@
 \chapter{Design}
 
 \section{Architecture}
+Moving towards architecture, we first have to separate the whole system into smaller parts that share the same responsability. \\
+This way, I can foresee four main services:
+\begin{itemize}
+    \item \textbf{Auth/User service:} to manage authorization and authentication.
+    \item \textbf{Stats service:} to manage all the information related to stats diagram generation. 
+    \item \textbf{Test service:} to manage the test creation, indicate if a reply is correct or not...It should be able to generate the tests from the dataset and get the videos for the helper videos and to form the tests.
+    \item \textbf{Video recognition service:} AI service to validate a video sent by the user. It will classify the video into labels.
+\end{itemize}
+
+There should be a direct communication between the \textit{Stats service} and the \textit{Test service} because the stats should be created from the data stored from the tests. \\
+Also, there should be communication between the \textit{Video recognition service} and the \textit{Test service} because in order to update if a reply is okay or not, the {Test service} should know if the user signed correctly in some particular cases.
+
+\begin{figure}[H]
+    \centering
+        \includegraphics[width=\textwidth]{assets/diagrams/services.png}
+    \caption{Towards the app's architecture}
+    \label{fig:design_architecture_first}
+\end{figure}
+
+Reiterating the last diagram, I got this one, which specifies better the entities. The user communicates with the app, which is formed by the four subsystems. I can have two databases, one for user identification (\textbf{Auth}) and another one for user stats, info about the tests done by them...(\textbf{User stats}). \\
+
+The main difference now is the communication part: the \textit{stats service} does not need to communicate with the \textit{test service}, as the stats can be dynamically created from the info of the database. 
+
+\begin{figure}[H]
+    \centering
+        \includegraphics[width=\textwidth]{assets/diagrams/architecture.png}
+    \caption{App's architecture}
+    \label{fig:design_architecture_last}
+\end{figure}
 
 \section{Conceptual design}
+As I finally came to understand the better the entities of the application and their relationship, I created a new diagram to simplify all of them. \\
+
+By doing this diagram, I got clearer that the event that changed the stats was the case when a user does a test. Also, I got a new entity: \textit{Question}, which is the base component to form a test. The question comes from the \textit{question generator}, that using the \textit{video storage service} (which can be an extern service) and the \textit{dataset} creates the questions.
+
+\begin{figure}[H]
+    \centering
+        \includegraphics[width=\textwidth]{assets/diagrams/conceptual.png}
+    \caption{App's architecture}
+    \label{fig:design_conceptual}
+\end{figure}
 
 \section{UI design}
-\subsection{Design patterns}
 \subsection{Low fidelity design}
 To validate all the features that the application should have, the navigation, implementation of user stories, design patterns...I created a low-fidelity design. \\
 
@@ -227,6 +265,4 @@ If we take a look into the quiz ramification, we see a use case: create a test a
     \caption{Low-fidelity design}
     \label{fig:design_lofi}
 \end{figure}
-
-\subsection{High fidelity design}
 
