@@ -2,7 +2,13 @@
 
 \section{Review of design diagrams}
     \subsection{Entities diagrams}
+    This diagram includes all properties and methods from every class in the app. It also contains enums and the navigation between the entities. \\
+    As this diagram is too big to include it on the document, see it \href{https://github.com/JesusGonzalezA/LearnASLDoc/blob/master/doc/assets/diagrams/interfaces.png}{here}.
+
     \subsection{Interfaces diagrams}
+    This diagram includes the definitions of all the interfaces in the application and the navigation between them. \\
+    As this diagram is too big to include it on the document, see it \href{https://github.com/JesusGonzalezA/LearnASLDoc/blob/master/doc/assets/diagrams/entities.png}{here}.
+
     \subsection{Abstract factory to generate the questions}
     Due to maintenance reasons I opted to use this pattern to generate the questions. Imagine that, in the future, I want to add a new type of test. \\
     I should change all the logic in order to create just the questions for this test. \\
@@ -14,8 +20,8 @@
             \caption{Abstract factory}
             \label{fig:implementation_af}
         \end{figure}
-\section{Sequence diagram, use case: \textit{Get a test}}
-\section{Sequence diagram, use case: \textit{Delete a test}}
+
+\newpage
 \section{Backend code documentation}
     \subsection{Architecture}
         \subsubsection{From MVC to Onion Architecture}
@@ -46,31 +52,31 @@
         \end{figure}
 
         \subsubsection{How to orgnanize the project}
-        \begin{itemize}
+        \begin{itemize}[noitemsep]
             \item Test: it is used for testing purposes.
-                \begin{itemize}
+                \begin{itemize}[noitemsep]
                     \item References: all other layers.
                     \item Dependencies: xUnit.
                 \end{itemize}
             \item Api: it is similar to view layer. It is the layer that will allow a client to interact with the application.
-                \begin{itemize}
+                \begin{itemize}[noitemsep]
                    \item Reponsabilities (as directories):
-                        \begin{itemize}
+                        \begin{itemize}[noitemsep]
                             \item Controllers: define all the endpoints of the application and call the correct services on each method.
                             \item Middleware: catch users' calls to the Api. It allow to have a global exception handling, authorization, authentication...
                             \item Properties: define the launch settings for the Http Server.
                         \end{itemize}
                     \item References: Core
                     \item Dependencies:
-                        \begin{itemize}
+                        \begin{itemize}[noitemsep]
                             \item Api Rest: Asp.Net Core 5.0
                             \item Documentation: Swagger
                         \end{itemize}
                 \end{itemize}
             \item Core: it is the center part of the architecture. It contains the definition of all the entities of the application, both contracts for the Api communication with the clients and the entities, both model and data access entities. It also contains all the interfaces which are used to communicate between the Api layer and the Infraestructure (Other authors separate this into a new layer: service layer). This contains all the business logic and works with the data source.
-                \begin{itemize} 
+                \begin{itemize}[noitemsep] 
                     \item Responsabilities (as directories):
-                        \begin{itemize}
+                        \begin{itemize}[noitemsep]
                             \item Contracts: instead of sending and receiving the entities in the Api, a good approach is to use DTO (Data Transfer Objects). This way, the user don't need to send the Id before creating an entity, we can avoid to send properties that may be confidential such as passwords and we can retrieve just the needed information.
                             \item CustomEntities: definition of application entities, such as metadata to send information about pagination in the api, pagination entity, etc
                             \item Entities: definition of data access models.
@@ -87,9 +93,9 @@
                     \item Dependencies: None
                 \end{itemize}
             \item Infraestructure: concrete implementations of all the services needed by the app to work.
-                \begin{itemize}
+                \begin{itemize}[noitemsep]
                     \item Responsabilities (as directories):
-                        \begin{itemize}
+                        \begin{itemize}[noitemsep]
                             \item Data: definition of the context and migrations.
                             \item Extensions: initialize all the services and dependency injection container.
                             \item Factories: to implement abstract factory pattern to initialize the questions.
@@ -102,7 +108,7 @@
                         \end{itemize}
                     \item References: Core
                     \item Dependencies:
-                        \begin{itemize}
+                        \begin{itemize}[noitemsep]
                             \item Mail client: MailKit
                             \item ORM: Entity Framework Core
                             \item Validations: Fluent Validation
@@ -141,7 +147,7 @@
     
 
             \paragraph{Lifetime of an object}
-            \begin{itemize}
+            \begin{itemize}[noitemsep]
                 \item \textbf{Transient:} services are created each time they're requested. Best for lightweight, stateless services.
                 \item \textbf{Scoped:} services are created once per client request (connection). Better option when you want to maintain state within a request.
                 \item \textbf{Singleton:} services are created the first time they're requested.
@@ -210,7 +216,7 @@
         To mark navigational properties, I use \textit{virtual} keyword. This also enables \textit{Lazy Loading}, so these entities are only loaded when used. \\
 
         In the next fragment of code we can see the \textbf{User entity}. A user has the following properties:
-        \begin{itemize}
+        \begin{itemize}[noitemsep]
             \item Email
             \item Password
             \item ConfirmedEmail
@@ -231,6 +237,7 @@
                 caption={Entity class}, 
                 label={lst:impl_entity}]
             {code/Entity.cs}
+
         \subsubsection{Automatically tracking entities through events}
         When an operation with the database is made, the \textit{Entity framework} tracks the entity.  
         In the constructor of the \textit{DatabaseContext} class, I set up two methods to do when two events are fired. See \href{https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.changetracking.changetracker?view=efcore-5.0}{here}. \\
@@ -283,7 +290,7 @@
 
         \subsubsection{Logger}
         All logs are saved in the \textit{Log} directory. The name of the file comes from the day. Every log entry contains the next information:
-        \begin{itemize}
+        \begin{itemize}[noitemsep]
             \item Date and hour
             \item HTTP method from the request
             \item Route of the request
@@ -296,16 +303,147 @@
             \label{fig:implementation_logs}
         \end{figure}
         
-    \subsection{Filters: automatic validation}
-        \subsubsection{Using attributes}
-        \subsubsection{Using validators}
     \subsection{Mapping}
-        \subsubsection{Why using DTOs?}
-        \subsubsection{Automapper}
+        As Microsoft states \cite{DTO}, there are some cases in which you don't want to expose your database entities to the client in an \textit{API}. These cases could be:
+        \begin{itemize}[noitemsep]
+            \item Remove circular references
+            \item Hide properties 
+            \item Reduce payload size
+            \item Populate nested objects 
+            \item Protect sensitive data
+            \item Decouple the service layer from the database layer
+        \end{itemize}
+
+        In conclusion, the data transfer object is an entity with all the data you need to send to the client. It is constructed from the database entity. Therefore, you should have methods to transform a \textit{DTO} to a \textit{Database object} and viceversa. This process is called \textbf{Mapping}.
+
+        \subsubsection{AutoMapper}
+        To make the mapping process easier, I used a library called \textit{AutoMapper} \cite{AutoMapper}. \\
+
+        In the next code fragment, I show how to set up \textit{AutoMapper}. The first thing to do is creating a profile. In this case, I show a profile to map from \textit{UserDto} to \textit{UserEntity}, which is the database entity. Note that this map is reversible and, as both entities inherits from a base class, this class should have an own mapping too. The next thing to do is creating adding the profile to the \textit{mapper configuration} and setting up in the \textit{services}. Then, I can simply use it to map from an entity to the other. \\
+        \lstinputlisting[language=CSharp, captionpos=t,
+            caption={Mapping example}, 
+            label={lst:impl_automapper}]
+        {code/AutoMapper.cs}
+
+    \subsection{Filters: automatic validation}
+    According to Microsoft \cite{Filters}, filters allow to run code before or after specific stages in the request process pipeline. This specific filter, runs before the controller action and aims to avoid running unnecessary code due to the fact that the request is badly formed. \\
+
+        \subsubsection{Using validators}
+        I use a library called \textit{FluentValidation} \cite{FluentValidation}. This one allows a strongly-typed validation. \\
+
+        In the next fragment code, I show how to create a new custom validator and set it up in the \textit{Startup} class. \\
+        The class \textit{LoginDtoValidator} is a validator for the \textit{DTO} object \textit{LoginDto}. It adds rules for the object to not have an empty \textit{Email}, not having an empty \textit{Password} and its length from 6 to 15 and having a password that matches a \textit{RegEx} that checks if it has at least a lowercase and uppercase letter, if it has a digit and if it has at least a symbol. \\
+
+        \lstinputlisting[language=CSharp, captionpos=t,
+            caption={Configure the login dto validator}, 
+            label={lst:impl_filtervalidator}]
+        {code/Filters_Validator.cs}
+
+        \subsubsection{Using attributes}
+        They are called \textbf{Data annotations}. They serve the same thing, but it is less powerful, as they do not support conditional validations, they do not support validations in sets (check the field 'x' when the field 'y' is 'z'...). Nevertheless they are easy to use and they fulfill their purpose. \\
+        For simple cases, such as the next one, I only use this type of validation. In the next code fragment I show how to create an attribute to check if the model is valid or not. It checks the length of a file. If it is bigger than the configured value, the model is incorrect.
+
+        \lstinputlisting[language=CSharp, captionpos=t,
+            caption={Configure an attribute to validate the max file of a file}, 
+            label={lst:impl_filterattributes}]
+        {code/Filters_attributes.cs}
+
     \subsection{Security}
         \subsubsection{Hashing passwords}
+        As Microsoft recommends \cite{Hash}, I use \textbf{Pbkdf2 algorithm} to hash the passwords. It is a key derivation function to reduce brute-force attacks. \\
+
+        The algorithm receives as arguments the \textit{password, salt and iterations}. It is important to think in the check process before hashing the password. \\
+        In order to check the encrypted password, I would need the same arguments. If the salt or iterations varied from a password to another one, I should include this into the tuple in the database too. \\
+        
+        This way, every password could have a different salt and/or iterations. I would read the encrypted password, the salt and the iterations that I used to hash the password and I could check it this way. \\
+        A way of doing it could be having this structure: \textit{<iterations>.<salt>.<encrypted\_key>}. \\
+        
+        The next fragment of code shows how to implement this. \\
+
+        \lstinputlisting[language=CSharp, captionpos=t,
+            caption={Method to hash a password}, 
+            label={lst:impl_hash}]
+        {code/PasswordService_Hash.cs}
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=0.9\textwidth]{assets/users_database.png}
+            \caption{Encrypted passwords in the database}
+            \label{fig:user_database}
+        \end{figure}
+
+        As I said before, the structure of the tuple in the database was \textit{<iterations>.<salt>.<encrypted\_key>}. This way, I could split the password from the database into three parts by the character '.'. \\
+
+        The first part should be the number of iterations, the second one should be the salt and the third part the encrypted key. These would be the arguments to check the password. \\
+
+        In the next fragment of code I show how to implement this. \\
+
+        \lstinputlisting[language=CSharp, captionpos=t,
+            caption={Method to check a password}, 
+            label={lst:impl_password}]
+        {code/PasswordService_Check.cs}
+
         \subsubsection{JWT tokens}
+        A JWT (Json Web Token) \cite{JWT.io} is a standard way to share claims securely between two parties. The token is divided in three parts. Each part is divided by the character '.'. \\
+        \begin{itemize}[noitemsep]
+            \item The first part includes information about the algorithm and token type.
+            \item The second part is the payload. It includes all the claims.
+            \item The third part is the verify signature.
+        \end{itemize}
+
+        You should not include confidential information in the claims as they can be read. The thing is that, by signing this token, I can securely communicate with my API and identify the user. This way I can avoid having sessions. \\
+        Also, the tokens has a issuing date. This way, you can check the date and only validate those signed before 'x' date. \\
+
+        In order to communicate with the server, you need to include the \textit{Authorization} header in the HTTP request. The structure would be: \textit{Authorization: Bearer <your\_jwt>}. \\
+
+        In the next figure, I show how to send a request to a protected route in the API. The response is unauthorized, as the token is invalid. \\
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=0.9\textwidth]{assets/unauthorized.png}
+            \caption{Unauthorized response}
+            \label{fig:user_unauthorized}
+        \end{figure}
+
+        As the token is invalid, the user would have to login in the app to get access to a token. \\
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=0.9\textwidth]{assets/login.png}
+            \caption{Login in the API}
+            \label{fig:user_login_api}
+        \end{figure}
+
+        In the next figure, you can see the payload from the token. It has the following claims:
+        \begin{itemize}[noitemsep]
+            \item \textbf{nbf:} not valid before (seconds since Unix epoch).
+            \item \textbf{exp:} expiration time (seconds since Unix epoch).
+            \item \textbf{emailaddress:} email address of the user.
+            \item \textbf{nameidentifier:} unique identifier.
+        \end{itemize}
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=0.9\textwidth]{assets/jwt.io.png}
+            \caption{JWT claims}
+            \label{fig:user_jwtclaims}
+        \end{figure}
+
+        Now the user can interact with the API as they have a correct token.
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=0.9\textwidth]{assets/authorized.png}
+            \caption{Authorized response}
+            \label{fig:user_authorized}
+        \end{figure}
+
         \subsubsection{Configuring CORS}
+    As MDN indicates \cite{CORS}, CORS (Cross-Origin Resource Sharing) is an HTTP header mechanism that allow a server to indicate other than its own from which a browser should permit loading resources. \\
+    Browsers do a \textit{preflight} request before doing the actual one to check if the server allows the request from this origin and this concrete method. \\
+
+    In the next fragment of code, I show how to implement the CORS policy in the app. It allow any method from the frontend origin. \\
+    \lstinputlisting[language=CSharp, captionpos=t,
+            caption={Configuring CORS}, 
+            label={lst:impl_cors}]
+    {code/Cors.cs}
+
     \subsection{Email service}
     \subsection{Pagination}
         \subsubsection{Why implementing pagination?}
@@ -319,7 +457,7 @@
     The diagram contains all the middleware layers. The ones in yellow are the ones created/configured by me. The rest are simple configured by the framework. \\
 
     A good explanation of this diagram should explains every middleware layer. As this is a very detailed work and unneccessary, I'll just explain a bit of every layer:
-    \begin{itemize}
+    \begin{itemize}[noitemsep]
         \item The uppest middleware layer is the \textit{Exception handler}. It is in charge of capturing the exceptions and reply correctly when something happens and log it.
         \item The \textit{Static files middleware} is in charge of give access to the filesystem. \\
         \item The \textit{CORS middleware} is in charge of configure the \textit{CORS} policy. \\
@@ -334,6 +472,40 @@
             \label{fig:implementation_middleware}
         \end{figure}
 
+    \section{Sequence diagram, common}
+    All requests have to go through the middleware flux. There are some middlewares that are common for all requests. These are the \textit{ErrorHandlingMiddleware}, \textit{ValidationMiddleware} and the \textit{AuthenticationHandler}. \\
+    Once the request passes through these middlewares, it reaches the controller.
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=\textwidth]{assets/diagrams/sequence_common.png}
+            \caption{Common behaviour sequence diagrams}
+            \label{fig:implementation_common}
+        \end{figure}
+
+
+    \section{Sequence diagram, use case: \textit{Delete a test}}
+    The user sends a request to the api to delete a test. The API would respond ok if the test have been succesfully deleted or conflict if an error has ocurred. \\
+    When the request arrives at the controller, the controller delegates in the \textit{TestService} the deletion of the test. It retrieves the test, check if the test is from the user and delete the test from the database and from the storage. \\
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=\textwidth]{assets/diagrams/deletetest.png}
+            \caption{Sequence diagram: delete a test use case}
+            \label{fig:implementation_deletetest}
+        \end{figure}
+
+    \section{Complete sequence diagram, use case: \textit{Get a test}}
+    This would be the complete sequence diagram, including the common part. Once the request passes all the middleware, it reaches the \textit{TestController}. It delegates the action into the \textit{TestService}. This gets the test from the repository, \\ 
+    check if the user is the owner of the test and if everything is okay it returns the test to the controller to be sent to the user. \\
+    If an alternative flux happens, a \textit{BusinessException} will be thrown and the user will receive an error message and code.
+        \newpage
+        \begin{figure}[H]
+            \centering
+                \includegraphics[angle=90, width=\textwidth, height=\textheight]{assets/diagrams/getatest.png}
+            \caption{Sequence diagram: get a test use case}
+            \label{fig:implementation_getatest}
+        \end{figure}
+
+\newpage
 \section{Frontend code documentation}
     \subsection{Organization of the project}
     \subsection{Redux pattern}
@@ -342,6 +514,7 @@
         \subsubsection{Custom component to integrate Material UI and Formik}
     \subsection{Persisting the data}
 
+\newpage
 \section{AI service code documentation}
     \subsection{API keys}
     \subsection{Protecting the API using JWT}
