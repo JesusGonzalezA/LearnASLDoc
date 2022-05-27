@@ -445,6 +445,41 @@
     {code/Cors.cs}
 
     \subsection{Email service}
+    In order to register in the application, a requisite is to have a valid email account. This is because the account will be checked, \\
+    so only real users with their real accounts will be registered. \\
+
+    Also, this allows to recover a password easily from the email and, in future versions, create email lists. \\
+
+    \subsubsection{Authorization flux}
+    The process could have been done using \textit{SSO}, \textit{OAuth flux}... \\
+    Nevertheless, I was recommended to use my own authorization flux in order to learn by my teachers in \textit{Vilnius University}. \\
+
+    \paragraph{Registration flux}
+    This way, the flux of registration would be the following:
+    \begin{enumerate}
+        \item The user registers in the application. There is a boolean field, \textbf{ConfirmedEmail}, that is marked as false and a string field, \textbf{TokenEmailConfirmation}, that is initialized with a new value.
+        \item The user is asked to check its email box.
+        \item The user clicks a link in the email sent to them. This link sends the user to a page that will validate the \textit{TokenEmailConfirmation} sent in the \textit{Param String} of the page location sending a request to the API.
+        \item The user's email is now validated, so the field \textit{ConfirmedEmail} is true. 
+    \end{enumerate}
+
+    \paragraph{Login flux}
+    In order to log in the application, the email and password are checked, as well as the \textbf{ConfirmedEmail}. It should be true.
+
+    \paragraph{Password recovery flux}
+    To recover a password, I have to ensured that the user requesting the new password is the actual user. In order to do that, I have another field, \textbf{TokenPasswordRecovery}. This will be \textit{null} until the user requires to set a new password. \\
+    The application will send an email to the user with a link with this token in the \textit{Param String}, that will be sent in a form with the new password sent by the user. If the token is the same as the one in the database, I am sure that the user has \\
+    accessed the page using their own email.
+
+    \subsubsection{How to set up the email service}
+    To set this service up, I created an interface to send the emails. I'm not going to explain in detail all the implementation, but it would be important to know that I create an \textit{SMTP (Simple Mail Transfer Protocol) client} using the library \textbf{MailKit} \cite{MailKit}. \\
+    I authenticate in my own Google account and I send the messages to the users. To save my credentials I store them not in the code but on the \textit{secrets manager tool}.
+
+    \lstinputlisting[language=CSharp, captionpos=t,
+            caption={EmailService interface and links for every use case}, 
+            label={lst:impl_email}]
+    {code/EmailService.cs}
+
     \subsection{Pagination}
         \subsubsection{Why implementing pagination?}
         \subsubsection{How to implement pagination?}
