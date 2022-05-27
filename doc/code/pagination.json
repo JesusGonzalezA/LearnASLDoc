@@ -1,0 +1,13 @@
+{
+    "x-pagination": {
+        "TotalCount": 9,
+        "PageSize": 10,
+        "CurrentPage": 1,
+        "TotalPages": 1,
+        "HasNextPage": false,
+        "HasPreviousPage": false,
+        "NextPageUrl": null,
+        "PreviousPageUrl":
+        null
+    } 
+}

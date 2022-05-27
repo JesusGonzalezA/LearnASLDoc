@@ -480,12 +480,106 @@
             label={lst:impl_email}]
     {code/EmailService.cs}
 
-    \subsection{Pagination}
+    \subsection{Pagination and population}
         \subsubsection{Why implementing pagination?}
-        \subsubsection{How to implement pagination?}
+        As the data in our application could be very heavy, it is not recommended to send all the chunk of data to the user. \\
+        Paginate is send partial information to the user. \\
+
+        Imagine that a user asks for the latest tests to review one of them. It is logic to think that just sending the latest could be neccessary, as they won't review the firt test. \\
+        This way, I could send the 10 last tests to the user. If they need another chunk of data, I could send the next 10 more. This will be beneficial for the both of us, as the network load is less, \\
+        the app will look faster and they can read the data easily. \\
+        Also, information in the database could be indexed to make the retrieving process even faster. \\
+
+        In the next figure I show an expample of a paginated response where I get the tests. As we can see in the header response, there is a field called \textbf{x-pagination}. This has \\
+        more information about the pagination.
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=0.9\textwidth]{assets/pagination.png}
+            \caption{Paginated response}
+            \label{fig:impl_pagination}
+        \end{figure}
+
+        \lstinputlisting[language=json, captionpos=t,
+            caption={Metadata information about the pagination}, 
+            label={lst:impl_pagination_json}]
+        {code/pagination.json}
+        
+        \subsubsection{What is population?}
+        Following the last example, imagine that I send all the information to the user about every test. The page is only displaying general information about the tests, but I'm also sending all the videos \\
+        to display every test. \\
+        
+        As this would be very heavy, I have \textit{DTO} objects that are general. This way, I can send the general information about the test, which is the exact data the user needs. If needed more, I can "populate" the tests, this is \\
+        sending all the information related to the questions.
+
+        \begin{figure}[H]
+            \centering
+            \begin{subfigure}[T]{0.49\textwidth}
+                \centering
+                \includegraphics[width=0.48\textwidth]{assets/populated_false.png}
+                \caption{Populated=false}
+                \label{fig:impl_populated_false}
+            \end{subfigure}
+            \hfill
+            \begin{subfigure}[T]{0.49\textwidth}
+                \centering
+                \includegraphics[width=0.48\textwidth]{assets/populated_true.png}
+                \caption{Populated=true}
+                \label{fig:impl_populated_true}
+            \end{subfigure}
+               \caption{Difference between a populated and a non-populated request}
+               \label{fig:impl_populated}
+        \end{figure}
+
     \subsection{Health check of the API}
+    As Microsoft indicates \cite{Health}, it is good to add checkers for the state of the application. This way, orchestrators, logs and people can check the state of the application and its dependencies. \\
+    I added a check for the application and the database context. In the next figure, you can see the difference of response got from this endpoint. \\
+    
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}[T]{0.49\textwidth}
+            \centering
+            \includegraphics[width=0.48\textwidth]{assets/healthy.png}
+            \caption{Healthy state}
+            \label{fig:impl_healthy}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[T]{0.49\textwidth}
+            \centering
+            \includegraphics[width=0.48\textwidth]{assets/unhealthy.png}
+            \caption{Unhealthy state}
+            \label{fig:impl_unhealthy}
+        \end{subfigure}
+           \caption{API health checks}
+           \label{fig:impl_health}
+    \end{figure}
+
+    Implement this in \textit{ASP.NET} is very easy. Just this method will do the magic. \\
+    \lstinputlisting[language=CSharp, captionpos=t,
+            caption={Configuring a health endpoint}, 
+            label={lst:impl_health_config}]
+    {code/Health.cs}
+
     \subsection{Documenting the API with code using Swagger}
-    \subsection{EXTRA: variant/invariant problem. How did I solve it?}
+    Swagger \cite{Swagger} is a tool to document, test and design APIs. When documenting the API with \textit{Swagger}, it creates a JSON file following the \textbf{OpenApi} specification, which allows \\
+    to define an API in a language-agnostic way. Therefore, I can share this document to other apps, i.e \textit{Postman} to avoid rewriting all the endpoints.
+
+    As it is visible in the next figure, I can document every endpoint in the API using comments. This way, my code and documentation goes together and it helps me to understand the better the functions. \\
+    \begin{figure}[H]
+        \centering
+            \includegraphics[width=0.9\textwidth]{assets/swagger_comment.png}
+        \caption{How to document an endpoint using swagger}
+        \label{fig:impl_swagger_endpoint}
+    \end{figure}
+
+    The output of documenting with Swagger the API would be this page. I can see all the endpoints of the application, execute them and see the schema definitions. This can be shared between teams and let the code as a black box. 
+    \begin{figure}[H]
+        \centering
+            \includegraphics[width=0.9\textwidth]{assets/swagger.png}
+        \caption{Swagger main page}
+        \label{fig:impl_swagger}
+    \end{figure}
+
     \subsection{Middleware diagram}
     In the next page, I included a diagram that represents the flux that a request follows from the first moment it reaches the server until the servers replies to this request. \\
 
