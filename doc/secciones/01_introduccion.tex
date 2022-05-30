@@ -35,7 +35,7 @@ a video into text without any complex hardware.
 \subsection{Sign language characteristics}
 The first thing that comes into mind is to develop a deep learning model able to translate signed sentences into 
 text. Firstly, we should know the difficulties that this would take:
-\begin{itemize}
+\begin{itemize}[noitemsep]
     \item In order to be able to translate a signed sentence into text, the model should understand the context to formulate the sentence correctly.
     \item Some words are signed the same way.
     \item Signs are performed differently if you are left-handed or right-handed.
@@ -91,7 +91,7 @@ that allows recognition at a word-level and a sentence-level, WLASL was created.
 
 \paragraph{Characteristics}
 They provide a big dataset, which characteristics are:
-\begin{itemize}
+\begin{itemize}[noitemsep]
     \item It is composed only by \textbf{monocular-RGB} videos: the videos do not rely on special equipment, such as depth cameras, colored gloves...
     \item All signers are in near-frontal views.
     \item The dataset contains 21.083 videos.
@@ -126,31 +126,29 @@ The dataset is divided in 4 parts, so that I can train a model in every dataset 
 \end{table}
 
 \paragraph{Models proposed} The paper proposes two models trained on this dataset:
-\begin{itemize}
+\begin{itemize}[noitemsep]
     \item I3D: it follows a I3D network architecture. It is trained using ImageNet \cite{ImageNet} \\ 
     and finetuned using Kinetics-400 \cite{Kinetics400}. Since the class number varies depending on \\
     the dataset, the last classification layer is changed according to it. \\
     \begin{figure}[H]
-        \begin{center}
+        \centering
             \includegraphics[width=0.4\textwidth]{assets/i3d.png}
-            \caption{I3D architecture}
-            \label{fig:introduction_i3d}
-        \end{center}
+        \caption{I3D architecture}
+        \label{fig:introduction_i3d}
     \end{figure}
     \item Pose TGCN: pose based temporal graph neural network. Usually, motion is modelled using 2D joint angles. \\
     They encode the motion using a holistic representation of the trajectories of body keypoints. They represent \\
     the human body as a fully-connected graph to learn the dependencies between joints in the trajectories. \\
     \begin{figure}[H]
-        \begin{center}
+        \centering
             \includegraphics[width=0.4\textwidth]{assets/tgcn.png}
-            \caption{TGCN architecture}
-            \label{fig:introduction_tgcn}
-        \end{center}
+        \caption{TGCN architecture}
+        \label{fig:introduction_tgcn}
     \end{figure}
 \end{itemize}
 
 \subparagraph{Data pre-processing} They following transformations are applied:
-\begin{itemize}
+\begin{itemize}[noitemsep]
     \item Resize the original resolution so the bounding-box of the signer is 256 pixels.
     \item Crop a 224x224 patch from an input frame.
     \item Apply an horizontal flipping with a prob of 0.5
@@ -158,13 +156,11 @@ The dataset is divided in 4 parts, so that I can train a model in every dataset 
 
 \subparagraph{Implementation details and accuracy evaluation} The models are all implemented in Pytorch. \\
 Models accuracy (top-10): \\
-\begin{figure}[!ht]
-    \begin{center}
+\begin{figure}[H]
+    \centering
         \includegraphics[width=1.0\textwidth]{assets/models_accuracy.png}
-        \caption{Models' accuracy comparison}
-        \label{fig:introduction_model_accuracy_comparison}
-    \end{center}
+    \caption{Models' accuracy comparison}
+    \label{fig:introduction_model_accuracy_comparison}
 \end{figure}
-\\
 
 Due to the better performance of the I3D model, I use it in my implementation.

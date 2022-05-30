@@ -114,6 +114,44 @@ stringstyle=\color{orange}}
 	    {]}{{{\color{delim}{]}}}}{1}
 	    {ñ}{{\~{n}}}{1}
 }
+% Listado definido para JavaScript
+% http://tex.stackexchange.com/questions/89574/language-option-supported-in-listings/89576#89576
+\lstdefinelanguage{javascript}{
+	morecomment = [l]{//}, 
+	morecomment = [l]{///},
+	morecomment = [s]{/*}{*/},
+	morecomment = [s]{/`}{/`},
+	morestring=[b]", 
+	breaklines=true,
+	sensitive = true,
+	keywords={
+		break,
+		case,
+		catch,
+		catch,
+		do,
+		else,
+		false,
+		function,
+		if,
+		in,
+		new,
+		null,
+		return,
+		switch,
+		true,
+		typeof,
+		var,
+		while},
+	ndkeywords={
+		boolean,
+		class,
+		export,
+		implements,
+		import,
+		this,
+		throw}
+}
 
 
 \begin{document}

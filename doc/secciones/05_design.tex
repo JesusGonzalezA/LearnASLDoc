@@ -3,7 +3,7 @@
 \section{Architecture}
 Moving towards architecture, we first have to separate the whole system into smaller parts that share the same responsability. \\
 This way, I can foresee four main services:
-\begin{itemize}
+\begin{itemize}[noitemsep]
     \item \textbf{Auth/User service:} to manage authorization and authentication.
     \item \textbf{Stats service:} to manage all the information related to stats diagram generation. 
     \item \textbf{Test service:} to manage the test creation, indicate if a reply is correct or not...It should be able to generate the tests from the dataset and get the videos for the helper videos and to form the tests.
@@ -144,7 +144,7 @@ Finally, we see a \textbf{selecting quiz's type screen}. The user will be able t
 \end{figure}
 Here I am presenting the quizes themselves. What it is important to notice is that the user can \textbf{skip} a question, see how many questions the current quiz has, the test type and a feedback for the question result, as well as the number of the current question. \\
 
-\begin{itemize}
+\begin{itemize}[noitemsep]
     \item \textbf{Mimic:} the question is composed by the word to sign and a help video. The user should sign themselves signing that word and can watch the help video to imitate it.
     \item \textbf{Option video to word:} the question is composed by a video representing a sign and 4 options (words). The user should select the word matching the video.
     \item \textbf{Option word to video:} the question is composed by a word and 4 videos representing signs. The user should select the video that signs correctly the asked word.

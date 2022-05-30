@@ -516,14 +516,14 @@
             \centering
             \begin{subfigure}[T]{0.49\textwidth}
                 \centering
-                \includegraphics[width=0.48\textwidth]{assets/populated_false.png}
+                \includegraphics[width=\textwidth]{assets/populated_false.png}
                 \caption{Populated=false}
                 \label{fig:impl_populated_false}
             \end{subfigure}
             \hfill
             \begin{subfigure}[T]{0.49\textwidth}
                 \centering
-                \includegraphics[width=0.48\textwidth]{assets/populated_true.png}
+                \includegraphics[width=\textwidth]{assets/populated_true.png}
                 \caption{Populated=true}
                 \label{fig:impl_populated_true}
             \end{subfigure}
@@ -539,14 +539,14 @@
         \centering
         \begin{subfigure}[T]{0.49\textwidth}
             \centering
-            \includegraphics[width=0.48\textwidth]{assets/healthy.png}
+            \includegraphics[width=\textwidth]{assets/healthy.png}
             \caption{Healthy state}
             \label{fig:impl_healthy}
         \end{subfigure}
         \hfill
         \begin{subfigure}[T]{0.49\textwidth}
             \centering
-            \includegraphics[width=0.48\textwidth]{assets/unhealthy.png}
+            \includegraphics[width=\textwidth]{assets/unhealthy.png}
             \caption{Unhealthy state}
             \label{fig:impl_unhealthy}
         \end{subfigure}
@@ -637,11 +637,114 @@
 \newpage
 \section{Frontend code documentation}
     \subsection{Organization of the project}
-    \subsection{Redux pattern}
+        \begin{itemize}[noitemsep]
+            \item Api: in this directory I defined all calls to the API.
+            \item Components: all components that compose the screens.
+            \item Helpers: it contains auxiliary functions and definitions of the schemas for the forms.
+            \item Models: it contains all object definitions. The main objects are the \textit{DTO}, which are the contracts between the API and the frontend project.
+            \item Redux: it defines the \textit{store}, the \textit{slices} and the \textit{thunks}. 
+            \item Routers: it defines the router logic. With this logic I also implement \textit{private} and \textit{public} routes.
+            \item Screens: it contains all the screens of the application.
+            \item Services: here all services for the application are defined. I just use a \textit{persistence} service that uses the localstorage, but defining the service I'm decoupled from the implementation so I would be able to change it in the future without changing all code in the app.
+        \end{itemize}
+
+    \subsection{State management}
+    I started using Redux \cite{Redux} for the state management of the application. This was the only solution that I knew and it pretty much helped me a lot, also for testing purposes. This library is based on a pattern that receives the same name. \\
+    There is a global shared state, that can be consulted by the components in the application and can only be updated through events or actions. These actions update the application's state based on the new arguments and the last state. \\
+    \begin{figure}[H]
+        \centering
+            \includegraphics[width=0.6\textwidth]{assets/diagrams/redux.png}
+        \caption{Redux pattern}
+        \label{fig:Redux pattern}
+    \end{figure}
+
+    Although there is a new version of the Redux library, which is what I use, and it has been proved in production environments, there are a lot of critics to this pattern \cite{NoRedux}, due to that a global state could not be neccessary. Therefore, I stopped "abusing" using this library \\
+    and started to separate from a global state fields that are not neccessary to be there. \\
+    There are other ways to share the state between components, i.e using \textit{props} or other \textit{hooks} such as \textit{useReducer}. \\
+
+    Coming again to Redux, it provides a lot of tools that help the developer to test and debug the application. This one is a tool that helps to follow the application state, update the state dispatching actions and \\
+    watching the actions dispatched by the application itself.
+    \begin{figure}[H]
+        \centering
+            \includegraphics[width=0.7\textwidth]{assets/redux_devtools.png}
+        \caption{Redux devtools}
+        \label{fig:Redux devtools}
+    \end{figure}
+
+    Also, Redux allow to manage the Api calls in an easier way. I can update the store's state depending on a success, error on pending state.
+    \lstinputlisting[language=javascript, captionpos=t,
+            caption={Updating the store's state depending on the Api result}, 
+            label={lst:impl_redux_api}]
+    {code/redux_api.ts}
+
+    There is a restriction, which is that the action that is dispatched to update the store should be syncronous. With the library \textit{thunk}, I can send async actions that will update the state when resolved.
+    \lstinputlisting[language=javascript, captionpos=t,
+            caption={Redux thunk}, 
+            label={lst:impl_redux_thunk}]
+    {code/redux_thunk.ts}
+
     \subsection{Private VS public routes}
+    As the application requires authorization and authentication to work, I need to protect the application routes so that the user always logs in the application. \\
+
+    I implement this functionality with two custom higher-components: \textit{PrivateRoute} and \textit{PublicRoute}. All these components render whatever is inside them (\textit{children of type any}). \\
+    The logic is in the \textit{return} statement:
+    \begin{itemize}[noitemsep]
+        \item The \textit{PrivateRoute} returns the inner-component as soon as it finds a valid \textit{jwt token}. If not, it redirects to an \textit{auth} route.
+        \item The \textit{PublicRoute} returns the inner-component as soon as it does not find a valid \textit{jwt token}. This is because if the user has already been authenticated, it will be redirected to an app route. This way I avoid to enter an auth route being already authenticated.
+    \end{itemize}
+    \lstinputlisting[language=javascript, captionpos=t,
+        caption={Protecting application routes}, 
+        label={lst:impl_routes}]
+    {code/routes.ts}
+
+    The router logic is delegated to a third-party library. I use two subrouters, one for \textit{authorization} (public) routes, and another for \textit{app/dashboard} (private) routes. \\
+    \lstinputlisting[language=javascript, captionpos=t,
+        caption={Use of public/private routes in router}, 
+        label={lst:impl_routers}]
+    {code/router.ts}
+
     \subsection{Intelligent forms using Formik}
-        \subsubsection{Custom component to integrate Material UI and Formik}
+    The forms have a lot of logic behind that is reusable. To avoid recreating all this code and started focusing on the app as soon as possible, I used a third party library called \textbf{Formik} \cite{Formik}. \\
+    In order to use a form this way, I need to create a validation schema and set the initial values of the forms. Usually, all forms are empty by default and the \textit{submit button} is disabled until the \\
+    form's state matches the validation schema. \\
+
+    As recommended by \textit{Formik}, I use a third party library to create these object schemas called \textit{Yup} \cite{Yup}.
+
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}[T]{0.49\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{assets/form_incorrect.png}
+            \caption{Incorrect state}
+            \label{fig:impl_form_incorrect}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[T]{0.49\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{assets/form_correct.png}
+            \caption{Correct state}
+            \label{fig:impl_form_correct}
+        \end{subfigure}
+           \caption{Controlling the form state}
+           \label{fig:impl_form}
+    \end{figure}
+
     \subsection{Persisting the data}
+    To improve the user experience, data should be persisted to avoid logging out the user from the application each time the page is refreshed. \\
+    This way, I can simulate an active session in the browser. \\
+    As the way to persistence this data may change, I encapsulated this logic in an object that could be changed in the future. \\
+
+    As I want this data to be stored in the browser rather than in the server, I would have to use the \textit{SessionStorage} or the \textit{LocalStorage}. \\
+    The main difference between these two is that the data in the \textit{LocalStorage} is avalaible for every tab in the active instance of the browser. On the \\
+    other hand, the data saved in the \textit{SessionStorage} is destroyed each time the user closes the tab. \\
+
+    In the next code fragment, I show how to mantein the session up if the user refreshed the browser's tab. The current user is saved in the \textit{SessionStorage} \\
+    when the user logs in the application. This way, the data is already there. If the user refreshes the page, the current state of the application would be constructed \\
+    from the \textit{SessionStorage}'s data. If there is no user saved there, the user has not an active session, so an invalid user is set.
+    \lstinputlisting[language=javascript, captionpos=t,
+        caption={How keeping the session active}, 
+        label={lst:impl_persisting}]
+    {code/initialState.ts}
 
 \newpage
 \section{AI service code documentation}
