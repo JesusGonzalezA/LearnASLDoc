@@ -748,11 +748,54 @@
 
 \newpage
 \section{AI service code documentation}
-    \subsection{API keys}
     \subsection{Protecting the API using JWT}
+        Decorators \cite{Decorator} are a powerful tool to change the behaviour of a function or class. \\
+        They allow to extend the behavior of the inner function or class without changing the implementation. \\
+
+        In example, without changing the implementation of the controller, I can add a function to protect it with a JWT. \\
+        The decorator checks the HTTP header, particularly the \textbf{x-access-token} field. It gets the JWT from there and \\
+        tries to decode it using the same \textit{Secret key} used in the \textit{Backend} project to code it. This way, only \\
+        users with a valid JWT from the other project can use this API.
+        \lstinputlisting[language=Python, captionpos=t, breaklines=true,
+            caption={Decorator to check a JWT}, 
+            label={lst:impl_decorator}]
+        {code/decorator.py}
+
     \subsection{Validating the videos}
+        The video sent to the API should have a valid extension and its filename should not be empty. \\
+        To validate the filename I use this auxiliary function. 
+        \lstinputlisting[language=Python, captionpos=t, breaklines=true,
+            caption={Validating a video sent to the API}, 
+            label={lst:impl_validate_video}]
+        {code/validate_video.py}
+
     \subsection{Initializing the model}
+        As every model performs the better with a different dataset, I initialize a model for each dataset, so I have three active models. \\
+        In terms of performance, it is recommended to initialize the model outside the controller and have just an instance per thread. \\
+
+        As the Flask documentation indicates, for production purposes it is recommended to use streamer services \cite{ServiceStreamer} to let \\
+        the users send multiple videos/images and maximize the paralleling processing capacity of the GPU.
+        If going to a production environment,
+        \lstinputlisting[language=Python, captionpos=t, breaklines=true,
+            caption={Setting up a model}, 
+            label={lst:impl_setup_model}]
+        {code/setup_model.py}
+
     \subsection{Executing the model}
-        \subsection{Video transformations}
-    \subsection{Example}
+        \subsubsection{Video transformations}
+        The transformations applied are the indicated in the paper \cite{Li2019}. 
+        \begin{itemize}[noitemsep]
+            \item Load RGB frames from the video 
+            \item Horizontally flip the video with a probability of 0.5
+            \item Crop the video (centering, 224px)
+        \end{itemize}
+        
+        \lstinputlisting[language=Python, captionpos=t, breaklines=true,
+            caption={Video transformations}, 
+            label={lst:impl_transformations}]
+        {code/transformations.py}
+
+        The model prediction is a classification of the best labels that match the video. To return a correct value to the API, I send the \\
+        best 10 words that match the video. In order to do that, I just need to get the word that matches the label, which comes from a dictionary.
+    
     

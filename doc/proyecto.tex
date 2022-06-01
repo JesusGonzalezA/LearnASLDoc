@@ -142,7 +142,9 @@ stringstyle=\color{orange}}
 		true,
 		typeof,
 		var,
-		while},
+		const,
+		while,
+		},
 	ndkeywords={
 		boolean,
 		class,
@@ -151,6 +153,13 @@ stringstyle=\color{orange}}
 		import,
 		this,
 		throw}
+}
+% Listing for github actions
+\lstdefinelanguage{yaml}{
+	alsoletter=-,
+  	keywords={true,false,null,y,n, name, on, jobs, push, pull_request, env, steps, runs-on, run, uses, with, working-directory, branches, paths, dotnet-version },
+  	ndkeywords={},
+  	sensitive=false
 }
 
 
