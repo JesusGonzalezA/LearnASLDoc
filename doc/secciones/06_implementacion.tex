@@ -392,7 +392,7 @@
         \end{itemize}
 
         You should not include confidential information in the claims as they can be read. The thing is that, by signing this token, I can securely communicate with my API and identify the user. This way I can avoid having sessions. \\
-        Also, the tokens has a issuing date. This way, you can check the date and only validate those signed before 'x' date. \\
+        Also, the tokens have a issuing date. This way, you can check the date and only validate those signed before 'x' date. \\
 
         In order to communicate with the server, you need to include the \textit{Authorization} header in the HTTP request. The structure would be: \textit{Authorization: Bearer <your\_jwt>}. \\
 
@@ -613,7 +613,7 @@
 
 
     \section{Sequence diagram, use case: \textit{Delete a test}}
-    The user sends a request to the api to delete a test. The API would respond ok if the test have been succesfully deleted or conflict if an error has ocurred. \\
+    The user sends a request to the api to delete a test. The API would respond ok if the test has been succesfully deleted or conflict if an error has ocurred. \\
     When the request arrives at the controller, the controller delegates in the \textit{TestService} the deletion of the test. It retrieves the test, check if the test is from the user and delete the test from the database and from the storage. \\
         \begin{figure}[H]
             \centering
