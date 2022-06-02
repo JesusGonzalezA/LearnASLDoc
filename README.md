@@ -1,10 +1,6 @@
-# Trabajo de Fin de Grado: *Título*
-
-**Este sería el README de tu proyecto. Consulta las [instrucciones de
-instalación](INSTALL.md)
-
-### Autor(a): Nombre
-### Tutor(a)(es): Nombre(s)
+# Trabajo de Fin de Grado: *LearnASL*
+### Autor(a): Jesús González Álvarez
+### Tutor(a)(es): Miguel Lastra Leidinger
 ___
 
 La documentación de este proyecto está realizada con `LaTeX`, por lo
@@ -28,9 +24,8 @@ y de nuevo
 O directamente
 
     make
-    
-(que habrá que editar si el nombre del archivo del proyecto cambia)
 
 # INSTRUCCIONES
 
-Lee [INSTALL.md](INSTALL.md) para las instrucciones de uso.
+Lee [instrucciones de
+instalación](https://github.com/JesusGonzalezA/LearnASL/wiki/How-to-install).
