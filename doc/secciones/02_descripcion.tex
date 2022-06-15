@@ -1,23 +1,22 @@
 \chapter{Problem description}
 
-There is a big gap between deaf-and-dumb communities and the rest of society. Sign languages are vital for deaf-and-dumb people to communicate, and this gap is even bigger because most of people does not know how to sign. \\
+There is a big gap between deaf-and-dumb communities and the rest of society. Sign languages are vital for deaf-and-dumb people to communicate and it is rare to find people that know how to sign outside this group.
+In addition, existing systems use expensive hardware, which make the learning process of sign language even less accesible. \\ 
 
-In addition, old studies use expensive hardware, which make the learning process of sign language even less accesible. \\ 
-
-In order to lessen this gap, an application is planned to be developed, using just integrated hardware of user's devices. Therefore, people will have a new resource to learn how to sign and validate if they are performing correctly.
+In order to lessen this gap, an application is planned to be developed, using just commodity hardware. Therefore, people will have a new resource to learn how to sign and validate if they are performing correctly.
 
 \section{Description of the application}
-The application, \textbf{Learn ASL}, is planned to be a web application, as it should be accesible to every device and every operative system.
+The application, \textbf{Learn ASL}, is planned to be a web application, as it should be accesible from every device and every operative system.
 The main objective of the application is to allow users to learn words in sign language and verify if they are signing correctly. \\
 
 This way, the user would be able to do tests. In these tests the user would be asked:
 \begin{itemize}[noitemsep]
-    \item \textbf{A word:} 
+    \item \textbf{About a word:} 
         \begin{itemize}[noitemsep]
             \item The user would select the video that matches.
             \item The user would sign the word and the application would verify if the signed word in the video matches.
         \end{itemize}
-    \item \textbf{A video:} The user would select the word that matches.
+    \item \textbf{About a video:} The user would select the word that matches.
 \end{itemize}
 
 \subsection{Types of tests}
@@ -25,8 +24,8 @@ The application will be able to generate different types of tests:
 \begin{itemize}[noitemsep]
     \item \textbf{Option tests:}
         \begin{itemize}[noitemsep]
-            \item \textbf{Word to video test:} the user will be asked a word. The user will have to select the video that matches that word.
-            \item \textbf{Video to word test:} the user will be asked a video. The user will have to select the word that matches that video.
+            \item \textbf{Word to video test:} the user will be asked about a word. The user will have to select the video that matches that word.
+            \item \textbf{Video to word test:} the user will be asked about a video. The user will have to select the word that matches that video.
         \end{itemize}
     \item \textbf{QA tests:} the user will be asked to sign a word. The user will upload a video to the application and it will be validated by the system.
     \item \textbf{Mimic tests:} the user will be asked to sign a word. Unlike 'QA tests', the user will be shown a helper video too, so that the user just has to imitate the video and upload it to the application in order to be validated.
@@ -34,8 +33,8 @@ The application will be able to generate different types of tests:
 
 These tests will be again splitted into two main types:
 \begin{itemize}[noitemsep]
-    \item \textbf{Error tests:} the tests are formed with words that were incorrectly replied by the user. Once the user reply the asked word correctly, the word won't appear in an error test until the user fails again.
-    \item \textbf{Normal tests:} the tests are formed with all the words.
+    \item \textbf{Error tests:} the tests are formed with words from user's errors.
+    \item \textbf{Normal tests:} the tests are formed using all the words in the dataset.
 \end{itemize}
 
 \subsection{Requisites of the application}
