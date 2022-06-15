@@ -798,4 +798,58 @@
         The model prediction is a classification of the best labels that match the video. To return a correct value to the API, I send the \\
         best 10 words that match the video. In order to do that, I just need to get the word that matches the label, which comes from a dictionary.
     
+    \section{Communication between the Backend and the AI Service}
+    The \textit{Backend} and the \textit{AI Service} are two completely independent modules. To allow them to communicate, the \textit{AI Service} includes a \textbf{REST API} \\
+    that exposes a function to be called from other services, in this case the \textit{Backend}. 
+
+    As shown in the next figure, the user communicates with the backend of the application using the frontend in their device. \\
     
+    The use case in which the backend communicates with the \textit{AI Service} is the one in which the user replies to a question. The user sends the reply to the question by clicking on a button in their device, and a form is sent to \\
+    the server. The backend of the application gets the request and tries to update the database with the user reply. In case the test is a \textit{Mimic or QA test}, the backend is not \\
+    able by itself to validate if the user's reply is correct or not, as the user's reply is a video signing the given word. \\
+
+    In case the test is of these types, the backend will start communication with an extern service, the \textit{AI Service} sending the user's video to classify it. The communication is made via an API, \\
+    so the backend will send an HTTP request to this endpoint. The response from this endpoint will be a list of words classified by the service. If the word to sign is between these words, the backend will \\
+    update the question in the database as a correct question. If the classification does not include the given word, the backend will update the question in the database as a failed question.
+    \begin{figure}[H]
+        \centering
+            \includegraphics[width=\textwidth]{assets/diagrams/comm.png}
+        \caption{Communication between services}
+        \label{fig:impl_comm}
+    \end{figure}
+
+    I am going to show the neccessary code to implement the communication. I'm skipping some code to make it easier to read. \\
+
+    The controller receives the request and delegates the functionality to the correct service. In this case, the \textit{QuestionService}. \\
+    The main responsability of the \textit{UpdateQuestion} in the \textit{QuestionService} is to update the question in the database. It will get the \\
+    repository and the question with all the updated parameters and then delegates the responsability of updation to the correct repository. 
+    \lstinputlisting[language=CSharp, captionpos=t, breaklines=true,
+            caption={Controller delegating the service the updation of the question}, 
+            label={lst:impl_reply}]
+    {code/Reply.cs}
+
+    The function to get the updated parameters is in charge of checking if the question is correct or not. The initial parameters are \\
+    the ones that the question already has, so it starts getting the question from the repository. Then, it checks the type of the test. In case the test is \\
+    a \textit{Mimic or QA test}, it is needed to communicate with the \textit{AI Service} to check if the question is correct or not. \\
+    The question will be correct if the extern service includes the asked word to sign amongst the top 10 predicted words from the user's video \\
+    As the responsability of this function is not to do the communication but to communicate when neccessary, \\
+    it will delegates this to the \textit{AIService}, which is an abstraction of the real service, which is extern to this application. 
+    \lstinputlisting[language=CSharp, captionpos=t, breaklines=true,
+            caption={The service gets the parameters to update the question in the Database. For some tests, it communicates with the \textit{AI Service} to get them.}, 
+            label={lst:impl_replyi}]
+    {code/ReplyI.cs}
+
+    As the \textit{AI Service} is an extern independent module that initializes a Deep Learning model and executes it, it is needed an API to \\
+    communicate with others services. This service includes an HTTP API, so to call it I just need to send an HTTP request. \\
+    
+    The request should have some parameters to execute the model correctly, such as the difficulty to select the model and the video itself to classify it. \\
+    Also, it should includes the authorization to avoid the restrict the access to this resource. \\
+
+    The reply will come as a string, so it should be mapped into an object to work with this classification and try to find the asked word. It will be mapped to a list \\
+    of 10 elements, the top ten classifications made by the deep learning model.
+    \lstinputlisting[language=CSharp, captionpos=t, breaklines=true,
+            caption={How the backend communicates with the extern service sending an HTTP request}, 
+            label={lst:impl_replyii}]
+    {code/ReplyII.cs}
+
+
