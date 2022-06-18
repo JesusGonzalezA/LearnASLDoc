@@ -176,7 +176,7 @@ All tests are executed and the summary is logged.
     \label{fig:test_getstats}
 \end{figure}
 
-The next use case shows the flow of an user doing a log in the application, creating some tests and deleting one of them. \\
+The next use case shows the flow of a user doing a log in the application, creating some tests and deleting one of them. \\
 This way, I chain the login request with the \textit{Create a test} request. The tests are executed and if the last call has a \textit{201} code, \\
 the next call can be executed, as the test has already been created and can be deleted. The environment is updated so that the id of the test to delete \\
 is the last created and this id is used for the deletion call.

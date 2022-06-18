@@ -1,17 +1,17 @@
 \chapter{Design}
 
 \section{Architecture}
-Moving towards architecture, we first have to separate the whole system into smaller parts that share the same responsability. \\
-This way, I can foresee four main services:
+Moving towards architecture (see figure \ref{fig:design_architecture_first}), we first have to separate the whole system into smaller parts.
+This way, I identified four main services: 
 \begin{itemize}[noitemsep]
     \item \textbf{Auth/User service:} to manage authorization and authentication.
     \item \textbf{Stats service:} to manage all the information related to stats diagram generation. 
-    \item \textbf{Test service:} to manage the test creation, indicate if a reply is correct or not...It should be able to generate the tests from the dataset and get the videos for the helper videos and to form the tests.
-    \item \textbf{Video recognition service:} AI service to validate a video sent by the user. It will classify the video into labels.
+    \item \textbf{Test service:} to manage the test creation, e.g. indicate if a reply is correct or not. It should be able to generate the tests from the dataset and get the helper videos to form the tests.
+    \item \textbf{Video recognition service:} AI service to validate a video sent by the user. It will label the video.
 \end{itemize}
 
-There should be a direct communication between the \textit{Stats service} and the \textit{Test service} because the stats should be created from the data stored from the tests. \\
-Also, there should be communication between the \textit{Video recognition service} and the \textit{Test service} because in order to update if a reply is okay or not, the {Test service} should know if the user signed correctly in some particular cases.
+There should be a direct communication between the \textit{Stats service} and the \textit{Test service} because the stats should be created from the data gathered from the tests. \\
+Also, there should be communication between the \textit{Video recognition service} and the \textit{Test service} in order to detect if an answer is correct or not. \\
 
 \begin{figure}[H]
     \centering
@@ -20,9 +20,10 @@ Also, there should be communication between the \textit{Video recognition servic
     \label{fig:design_architecture_first}
 \end{figure}
 
-Reiterating the last diagram, I got this one, which specifies better the entities. The user communicates with the app, which is formed by the four subsystems. I can have two databases, one for user identification (\textbf{Auth}) and another one for user stats, info about the tests done by them...(\textbf{User stats}). \\
-
-The main difference now is the communication part: the \textit{stats service} does not need to communicate with the \textit{test service}, as the stats can be dynamically created from the info of the database. 
+A refined version of the previous diagram can be seen on figure \ref{fig:design_architecture_last}. 
+The user communicates with the app, which is formed by the four subsystems. 
+The system has two databases, one for user identification (\textbf{Auth}) and another one for user stats, info about the tests done by them... (\textbf{User stats}). 
+Now the \textit{stats service} does not need to communicate with the \textit{test service}, as the stats can be dynamically created. \\
 
 \begin{figure}[H]
     \centering
@@ -32,9 +33,9 @@ The main difference now is the communication part: the \textit{stats service} do
 \end{figure}
 
 \section{Conceptual design}
-As I finally came to understand the better the entities of the application and their relationship, I created a new diagram to simplify all of them. \\
-
-By doing this diagram, I got clearer that the event that changed the stats was the case when a user does a test. Also, I got a new entity: \textit{Question}, which is the base component to form a test. The question comes from the \textit{question generator}, that using the \textit{video storage service} (which can be an extern service) and the \textit{dataset} creates the questions.
+It is neccessary to identify all the entities of the system to create the database. These entities are shown in an 
+E-R (Entity-Relationship) diagram (see figure \ref{fig:design_conceptual}). This way, I identified a new entity: 
+\textit{Question}, which is the base component to create a test. The question comes from the \textit{question generator}, which creates the questions using the \textit{video storage service} (which can be an extern service) and the \textit{dataset}.
 
 \begin{figure}[H]
     \centering
@@ -47,23 +48,17 @@ By doing this diagram, I got clearer that the event that changed the stats was t
 \subsection{Low fidelity design}
 To validate all the features that the application should have, the navigation, implementation of user stories, design patterns...I created a low-fidelity design. \\
 
-Firstly, I present all the screens created drawing in a tablet. Then, I present the navigation between these screens, so that you can see the flow of the application and how \\
-an user should interact with the app itself. \\
+Firstly, I present all the screens and then the navigation between them to show how a user would interact with the application.
 
-I used a mobile as the device as this is the minimum hardware neccessary to use the application and most users nowadays use mobile devices. \\
-In order to launch a viable product, I should research the neccessities of these users and study their behaviour. This way, I could know if most of the users \\
-wanted to use their pc, tablet instead of mobile devices or they had additional hardware such as external cameras or support devices so that they can use both hands with \\
-their mobiles in order to sign correctly. As I don't have the resources and knowledge to do a really useful study of this kind, I selected the minimum device unit and \\
-a type of product and tools that could then be migrated to any device (web technology using React could be used in any device and then be migrated to React Native or a PWA reusing most of the components).\\
 \subsubsection{Common}
-These are the commons components for the whole application. The \textbf{navbar} and the \textbf{bottom bar}. \\
+These are the commons components for the whole application. The \textbf{navbar} and the \textbf{bottom bar}. See figure \ref{fig:design_common}.
 
-The \textbf{navbar} shows basic information about the current user and allow a quick navigation to secondary info about the app. \\
-It could have information about the current page, but this won't be neccessary as I apply the \textit{3-step rule} and there is no much information in this application. \\
-What it is important about the navbar, it is that it will allow the navigation to the last page.
+The \textbf{navbar} shows basic information about the current user and allows a quick navigation to secondary information about the app.
+It allows the navigation to the previous page and contains the title of the current one. The information scheme was designed
+using the \textit{3-step rule}.
 
-The \textbf{bottom bar} allow the user to navigate through the main pages of the application. It won't be visible in subpages to allow the user to concentrate in a task and \\
-gain space in the screen. \\
+The \textbf{bottom bar} allow the user to navigate through the main pages of the application. 
+It won't be visible in subpages to allow the user to concentrate on the task and save screen space.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.24\textwidth]{assets/screens/Button - User.png}
@@ -72,9 +67,9 @@ gain space in the screen. \\
 \end{figure}
 
 \subsubsection{Authorization}
-These screens just show the initial pages of the application. In order to be used, being logged in is needed, so the user should be firstly registered and then signed in to start a new session.\\
+The next figure \ref{fig:design_screens_auth} shows the initial pages of the application. In order to be used, being logged in is needed, so the user should be firstly registered and then signed in to start a new session.\\
 
-orify: \textit{RF\_1.1} and \textit{RF\_1.2}. \\
+Satisfy: \textit{RF\_1.1} and \textit{RF\_1.2}. \\
 \begin{figure}[H]
     \centering
     \begin{subfigure}[T]{0.49\textwidth}
@@ -95,9 +90,9 @@ orify: \textit{RF\_1.1} and \textit{RF\_1.2}. \\
 \end{figure}
 
 \subsubsection{Home}
-The home screen will show the main information a user want to access. This is the recent quizs taken by the user. \\
+The home screen (see figure \ref{fig:design_home}) will show the main information a user want to access. This is the recent quizs taken by the user. \\
 
-In addition, I included an \textbf{ad component}, so that the monetization model of the app could be via ads. This should be taken into account when the app is going to be launched in production and to create a valid business model.\\
+In addition, I included an \textbf{ad component}, so that the monetization model of the app could be performed via ads. This should be taken into account when the app is going to be launched in production and to create a valid business model.\\
 
 It satifies: \textit{RF\_2.3}. \\
 \begin{figure}[H]
@@ -108,15 +103,14 @@ It satifies: \textit{RF\_2.3}. \\
 \end{figure}
 
 \subsubsection{Quiz}
-These are the common components/screens for the quizs. \\
+These are the common components/screens for the quizzes: \\
 
-Firstly, we see a \textbf{result screen}, in which the user can see how they performed doing the current quiz. This could be reusable when the user is reviewing an already done quiz. \\
-As the main objective of an user in the application is to do quizes, it has a button to easily access this feature. \\
-A share button is included so that the application can gain visibility via users. The main objective of this is not fomenting competitivity, but gaining visibility in social network platforms. \\
+\begin{itemize}[noitemsep]
+    \item \textbf{Result screen:} the user can see how they performed doing the current quiz. See figure \ref{fig:design_screen_result}.
+    \item \textbf{Selecting difficulty screen:} the user will be able to customize a quiz, selecting the \textbf{difficulty} and the \textbf{number of questions} of a test. See figure \ref{fig:design_screen_select_dif}.
+    \item \textbf{Selecting quiz's type screen:} the user will be able to select the \textbf{test type} before starting a new one. See figure \ref{fig:design_screen_select_quiz}.
+\end{itemize}
 
-Secondly, we see a \textbf{selecting difficulty screen}. The user will be able to customize a quiz, selecting the \textbf{difficulty} and the \textbf{number of questions} of a test. \\
-
-Finally, we see a \textbf{selecting quiz's type screen}. The user will be able to select the \textbf{test type} before starting a new one. \\
 \begin{figure}[H]
     \centering
     \begin{subfigure}[T]{0.32\textwidth}
@@ -126,14 +120,14 @@ Finally, we see a \textbf{selecting quiz's type screen}. The user will be able t
         \label{fig:design_screen_result}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[T]{0.33\textwidth}
+    \begin{subfigure}[T]{0.32\textwidth}
         \centering
         \includegraphics[width=0.72\textwidth]{assets/screens/quiz/common/Select difficulty.png}
         \caption{Select difficulty of a test}
         \label{fig:design_screen_select_dif}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[T]{0.33\textwidth}
+    \begin{subfigure}[T]{0.32\textwidth}
         \centering
         \includegraphics[width=0.72\textwidth]{assets/screens/quiz/common/Select quiz.png}
         \caption{Select type of test}
@@ -142,14 +136,16 @@ Finally, we see a \textbf{selecting quiz's type screen}. The user will be able t
        \caption{Common screens for all tests}
        \label{fig:design_test_common}
 \end{figure}
-Here I am presenting the quizes themselves. What it is important to notice is that the user can \textbf{skip} a question, see how many questions the current quiz has, the test type and a feedback for the question result, as well as the number of the current question. \\
 
+The components of the quizzes depending on the test type are (see figure \ref{fig:design_test_screen}):
 \begin{itemize}[noitemsep]
-    \item \textbf{Mimic:} the question is composed by the word to sign and a help video. The user should sign themselves signing that word and can watch the help video to imitate it.
+    \item \textbf{Mimic:} the question is composed by the word to sign and a help video. The user should sign that word and can watch the help video to imitate it.
     \item \textbf{Option video to word:} the question is composed by a video representing a sign and 4 options (words). The user should select the word matching the video.
-    \item \textbf{Option word to video:} the question is composed by a word and 4 videos representing signs. The user should select the video that signs correctly the asked word.
+    \item \textbf{Option word to video:} the question is composed by a word and 4 videos representing signs. The user should select the video corresponding to the word.
     \item \textbf{QA:} the question is composed by just the word to sign. The user should sign the word.
 \end{itemize}
+They have in common a button to \textbf{skip} a question and a component with information related to the current quiz (test type, number of questions and current question). \\
+
 \begin{figure}[H]
     \centering
     \begin{subfigure}[T]{0.24\textwidth}
@@ -182,7 +178,7 @@ Here I am presenting the quizes themselves. What it is important to notice is th
        \label{fig:design_test_screen}
 \end{figure}
 
-These screens represent how a user could reply to a question if they are asked to send a video. They could select a video from the gallery or record them signing the word, and send the video to the application or record it again. \\
+These screens represent how a user could answer a question if they are asked to send a video. They could select a video from the gallery or record themselves signing the word (see figure \ref{fig:design_screen_camera}), and send the video to the application or record it again (see figure \ref{fig:design_screen_camera_send}). \\
 \begin{figure}[H]
     \centering
     \begin{subfigure}[T]{0.49\textwidth}
@@ -203,15 +199,13 @@ These screens represent how a user could reply to a question if they are asked t
 \end{figure}
 
 \subsubsection{Stats}
-In order to show the stats to the user, a stat screen is added. \\
+The first screen (see figure \ref{fig:design_screen_stats_1}) represents the most basic information: the \textbf{percent of learnt words} and the \textbf{use of the app} (in the calendar a user can see the days they have used the application starting a new quiz). They can also consult the maximum number of days they have used the application in a row and the current streak. \\
 
-The first screen represent the most basic information: the \textbf{percent of learnt words} and the \textbf{use of the app} (in the calendar an user can see the days they have used the application starting a new quiz). They also can consult the maximum number of days they have used the application in a row and the current streak. \\
+The second screen (see figure \ref{fig:design_screen_stats_2}) shows more information about the app to the user: \textbf{time spent} in the app and \textbf{new words learnt}, as well as the \textbf{success rate}. The users can filter the stats by date (and/or) by difficulty. \\
 
-The second screen shows more information about the app to the user: \textbf{time spent} in the app and \textbf{new words learnt}, as well as the \textbf{success rate}. The users can filter the stats by date (and/or) by difficulty. \\
+The third screen (see figure \ref{fig:design_screen_stats_3}) show another way of representing the stats, in a more detailed way using graphs. \\
 
-The third screen show another way of representing the stats, in a more detailed way using graphs. \\
-
-orify: \textit{RF\_3.1} and \textit{RF\_3.2}. \\
+Satisfy: \textit{RF\_3.1} and \textit{RF\_3.2}. \\
 \begin{figure}[H]
     \centering
     \begin{subfigure}[T]{0.32\textwidth}
@@ -239,7 +233,7 @@ orify: \textit{RF\_3.1} and \textit{RF\_3.2}. \\
 \end{figure}
 
 \subsubsection{User}
-This screen allow the user to customize the application and change personal information. \\
+This screen (see figure \ref{fig:design_user}) allows the user to customize the application and change their personal information. \\
 \begin{figure}[H]
     \centering
         \includegraphics[width=0.24\textwidth]{assets/screens/User.png}
@@ -248,16 +242,15 @@ This screen allow the user to customize the application and change personal info
 \end{figure}
 
 \subsubsection{Navigation}
-In this figure we can see how a user would interact with every screen and the navigation between all of them. \\
+In the figure \ref{fig:design_lofi} we can see how a user would interact with every screen and the navigation between all of them.
 
-Firstly, there is a first layer that the user has to pass, which is the auth layer. In order to use the rest of the application (private routes), the user \\
-should sign in the application. \\
+Firstly, there is a first layer that the user has to pass, which is the auth layer. In order to use the rest of the application (private routes), the user
+must sign in the application.
 
-Secondly, there is a row containing the main screens of the application. Using the \textbf{bottom bar} the user is able to move from one to another. \\
+Secondly, there is a row containing the main screens of the application. Using the \textbf{bottom bar} the user is able to move from one to another.
 
-Finally, we see all the rest of the subpages of the application, that contains more detailed information or actions. Among them we can see more in-detail stats \\
-or doing/reviewing quizes.
-If we take a look into the quiz ramification, we see a use case: create a test and do it. The user first customize the quiz, selecting the difficulty, number of questions and type of quiz. Then the user reply to the questions of the quiz itself and then the user is able to see the quiz result.\\
+Finally, we see the subpages of the application.
+I represented a use case: create a test and do it. The user starts the quiz selecting the difficulty, number of questions and type of quiz. Then the user replies to the questions of the quiz itself and then the user sees the quiz result.
 
 \begin{figure}[H]
     \centering

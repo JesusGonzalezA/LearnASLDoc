@@ -5,9 +5,9 @@ The main objectives of the app to be developped, thinking of them as high-level 
 
 \begin{enumerate}[label=\textbf{Obj\_\arabic*:}, align=left, leftmargin=*]
     \item The system will manage and keep all the information related to users, such as their credentials, done tests and stats.
-    \item The system will update the users' stats automatically after every done test. 
+    \item The system will update the users' stats automatically after every test. 
     \item The system will allow the users to manage their account.
-    \item The system will allow the users to read their stats and done tests.
+    \item The system will allow the users to read their stats and tests.
     \item The system will manage the tests, being capable of creating them every time a user request to start one.
     \item The system will store the videos of the users signing and will manage its visibility (to hide the videos to other users so that privacy is achieved).
 \end{enumerate}
@@ -41,7 +41,7 @@ The main objectives of the app to be developped, thinking of them as high-level 
         \end{enumerate}
     \item Analytics management: The system will create stats from the tests done by the user until the moment the stats are required.
         \begin{enumerate}[label=\textbf{\theenumi.\arabic*}, align=left, leftmargin=*]
-            \item The system will create stats and display diagrams from the following topics:
+            \item The system will create stats and display diagrams of the following topics:
                 \begin{enumerate}
                     \item Success percent.
                     \item Percent of learnt words.
@@ -57,7 +57,7 @@ The main objectives of the app to be developped, thinking of them as high-level 
     \item \textbf{Open source:} The application should be open source, due to its social interest.
     \item \textbf{Accessibility: } The application should be accesible. Therefore, a well-tested UI library should be used and there will be no action that depends on sounds.
     \item \textbf{Usability:} The application should be responsive.
-    \item \textbf{Maintenability:} The application core should be under a clean architecture, so that the maintenance of the application is guaranteed to be an easier task.
+    \item \textbf{Maintenability:} The application core should have a clean architecture, so that the maintenance of the application is guaranteed to be a simpler.
     \item \textbf{Testability:} The main core of the application should be tested using unit tests.
     \item \textbf{Privacy:} The application will require authorization and authentication in order to let a user interact with the system. The user will only be granted to access their own resources.
 \end{enumerate}
@@ -65,37 +65,37 @@ The main objectives of the app to be developped, thinking of them as high-level 
 \section{User's stories}
 In order to write the stories and follow their development, I created a project in GitHub. You can access it here \url{https://github.com/JesusGonzalezA/LearnASL/projects/3}. \\
 
-I divided the user stories in three main categories, according to the Functional Requirements:
+I divided the user stories into three main categories, according to the Functional Requirements:
 \begin{enumerate}[label=\textbf{US\_\arabic*}, align=left, leftmargin=*]
     \item \textbf{User management} 
         \begin{enumerate}[label=\textbf{\theenumi.\arabic*}, align=left, leftmargin=*]
             \item As a non signer, I want to register in the app to learn American Sign Language.
-            \item As an user, I want to login in the app.
-            \item As an user, I want to change my password.
-            \item As an user, I want to delete my account.
-            \item As an user who does not remember their password, I want to be able to recover my account.
+            \item As a user, I want to login in the app.
+            \item As a user, I want to change my password.
+            \item As a user, I want to delete my account.
+            \item As a user who does not remember their password, I want to be able to recover my account.
             \item As an already registered user, I want to update my email.
         \end{enumerate}
     \item \textbf{Test management} 
         \begin{enumerate}[label=\textbf{\theenumi.\arabic*}, align=left, leftmargin=*]
-            \item As an user, I want to start a new test.
-            \item As an user, I want to select the difficulty of a test.
-            \item As an user, I want to customize the number of questions of a test.
-            \item As an user, I want to know my result in the test.
-            \item As an user, I want to see in which question I am on.
-            \item As an user, I want to review a test done in the past.
+            \item As a user, I want to start a new test.
+            \item As a user, I want to select the difficulty of a test.
+            \item As a user, I want to customize the number of questions of a test.
+            \item As a user, I want to know my result in the test.
+            \item As a user, I want to see in which question I am on.
+            \item As a user, I want to review a test done in the past.
             \item As a user, I want to see a list with all the tests I've made.
         \end{enumerate}
     \item \textbf{Stats management}
         \begin{enumerate}[label=\textbf{\theenumi.\arabic*}, align=left, leftmargin=*]
-            \item As an user, I want to select the interval of time of my stats.
-            \item As an user, I want to review my stats.
-            \item As an user, I want to delete my history of tests.
+            \item As a user, I want to select the interval of time of my stats.
+            \item As a user, I want to review my stats.
+            \item As a user, I want to delete my history of tests.
         \end{enumerate}
 \end{enumerate}
 
 \subsection{Milestones}
-Each milestone represents a group of user stories that can be grouped in order to present a value increase. The objective of define the milestones is that, due to the fact that I am not going to work full-time on the project, I cannot organize review meetings and fixed deadlines. This way, I can get feedback from every milestone's completion until the final product is achieved. \\
+Each milestone represents a group of user stories that can be grouped in order to present a value increase.
 
 \begin{enumerate}[label=\textbf{MIL\_\arabic*}, align=left, leftmargin=*]
     \item Project set up
@@ -128,7 +128,7 @@ Each milestone represents a group of user stories that can be grouped in order t
         \end{enumerate}
     \item The app saves info
         \begin{enumerate}[label=\textbf{\theenumi.\arabic*}, align=left, leftmargin=*]
-            \item A user can crud information about themselves. Refers to \textit{US\_1, US\_2, US\_3}.
+            \item A user can manage information about themselves. Refers to \textit{US\_1, US\_2, US\_3}.
             \item A user can watch past tests. Refers to \textit{US\_2.4, US\_2.6}.
             \item A user can delete old tests. Refers to \textit{US\_3.3}.
         \end{enumerate}
@@ -146,13 +146,10 @@ Each milestone represents a group of user stories that can be grouped in order t
 \end{enumerate}
   
 \section{Tool's selection}
-The main reason why I chose these technologies is because they would allow me to develop the application and I've already some experience with them. \\ 
-
-This way, I could minimize the risk of the development process and get the first MVP as soon as possible. \\
-
-In addition, all technologies are standards in industry and learning more about them will allow me to fit better in the market. \\ 
-
-Although I have more experience using other technologies, as they are requirements in the degree, I beleive this stack fits better my neccessities and are better adapted to this type of development.
+The main reason why I chose these technologies was I already had some experience with them.
+This way, I could minimize the risk of the development process and get the first MVP (Minimum Viable Product) as soon as possible.
+In addition, all these technologies are standards in industry and learning more about them will allow me to fit better in the market.
+The tools are listed on table \ref{table:analysis_tools_selection}. \\ 
 
 \begin{table}[h]
     \centering

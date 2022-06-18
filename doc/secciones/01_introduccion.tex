@@ -43,10 +43,10 @@ text. Firstly, we should know the difficulties that this would take:
 
 Just analysing the alphabet would be a much simplier task, as all letters are signed statically (in ASL: American Sign Language), except the 'J' and 'Z'.
 Therefore, a classification deep learning model could be developed to validate the images/videos from the user.
-Nevertheless, such a system would be of little use and this functionality has already been developed and implemented by some applications such as Snapchat.
+Nevertheless, such a system would be of little use and this functaionality has already been developed and implemented by some applications such as Snapchat.
 
 \subsection{Literature review}
-This section contains a table with the main sources of information used in this work. \\
+This section contains a table \ref{table:introduction_literature_review} with the main sources of information used in this work. \\
 
 \begin{longtable}{|p{3cm}|p{4cm}|p{6cm}|}
     \hline {Type} & {Title} & {Note}      \\
@@ -106,7 +106,7 @@ The main characteristics of this dataset are:
 \end{itemize}
 
 \paragraph{Dataset structure}
-The dataset is divided into four parts.
+The dataset is divided into four parts as shown on table \ref{table:introduction_dataset_subdivisions}.
 \begin{table}[h]
     \centering
     \resizebox{\textwidth}{!}{
@@ -125,7 +125,7 @@ The dataset is divided into four parts.
 
 \paragraph{Models proposed} The paper associated to the WLASL dataset proposes two models:
 \begin{itemize}[noitemsep]
-    \item I3D: it follows a I3D network architecture. It is trained using ImageNet \cite{ImageNet} 
+    \item I3D: it follows a I3D network architecture \ref{fig:introduction_i3d}. It is trained using ImageNet \cite{ImageNet} 
     and finetuned using Kinetics-400 \cite{Kinetics400}. Since the class number varies depending on
     the dataset, the last classification layer is changed according to it. \\
     \begin{figure}[H]
@@ -134,7 +134,7 @@ The dataset is divided into four parts.
         \caption{I3D architecture}
         \label{fig:introduction_i3d}
     \end{figure}
-    \item Pose TGCN: pose based temporal graph neural network. Usually, motion is modelled using 2D joint angles.
+    \item Pose TGCN: pose based temporal graph neural network \ref{fig:introduction_tgcn}. Usually, motion is modelled using 2D joint angles.
     They encode the motion using a holistic representation of the trajectories of body keypoints. They represent
     the human body as a fully-connected graph to learn the dependencies between joints in the trajectories.
     \begin{figure}[H]

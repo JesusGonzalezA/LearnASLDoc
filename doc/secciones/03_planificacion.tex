@@ -1,18 +1,10 @@
 \chapter{Planification}
 
 \section{Methodology}
-Usually in the degree, we use a waterfall model to develop. For small projects and use cases this methodology \\
-works fine, but in bigger projects it carries a lot of issues. \\
-
-In addition, it does not make sense to design all the system in earlier iterations, due to the fact that I \\
-don't really have much experience using these technologies, so my diagrams will change a lot in the future. \\
-This way, I should mantein both codebase and designs, and designs will be changed a lot and won't be very useful. \\
-
-In conclusion, although waterfall model is the most used in the degree, I opted to use an agile methodology and reiterate \\
-the design process, so I'm flexible and I only design what it is really neccessary to me in order to develop the app and mantein the codebase later on. \\
-
-At first, I used a process similar to waterfall model. I captured all the requirements, I design in a very basic way the app and I started developing the architecture. \\
-Later on, I would change the design, and the architecture itself, but that will come in the implementation chapter later. \\
+In the degree, we usually use a waterfall model (see figure \ref{fig:planification_waterfall_model}) to develop software. For small projects and use cases this methodology
+works fine, but in bigger projects it carries a lot of issues (late detection of errors related to analysis and design, testing late and difficulty to change or add new requisites).
+In addition, due to my limited experience I think an agile methodology would fit to a development
+process that overlaps with learning phases. \\
 
 \begin{figure}[H]
     \begin{center}
@@ -22,9 +14,9 @@ Later on, I would change the design, and the architecture itself, but that will 
     \end{center}
 \end{figure}
 
-In the Scrum model we iterate every fixed amount of time and start a new waterfall model. \\
-We critize what could be changed to implement and develop in a better way and we reorder the tasks. \\
-Me, instead of having fixed sprints, I used this methodology but the amount of time of every sprint was flexible. It was the neccessary time in order to achieve a new product with a value increase. \\
+Although the Scrum model (see figure \ref{fig:planification_scrum_model}) uses fixed time sprints, I decided to use sprints of variable duration as 
+the time that could be devoted to the project was not constant. Each sprint was designed in terms of 
+the value added.
 
 \begin{figure}[H]
     \begin{center}
@@ -34,7 +26,7 @@ Me, instead of having fixed sprints, I used this methodology but the amount of t
     \end{center}
 \end{figure}
 
-Firstly, I recognised all the tasks that I should complete in order to develop the application and the thesis itself. I divided into groups:
+Firstly, I identified all the tasks that I would have to complete to develop the application and the thesis itself. These tasks are:
 \begin{itemize}[noitemsep]
     \item Literature review
     \item Backend
@@ -44,21 +36,14 @@ Firstly, I recognised all the tasks that I should complete in order to develop t
     \item Design
 \end{itemize}
 
-Then I grouped the tasks in order to deliver a new product that represents a value increase. \\
-This new product should be validated, so a meeting with the tutor was appointed. \\
-Then, the rest of the active tasks were given a priority and grouped to form the new iteration backlog. \\
-There were a lot of replanification, this was due to:
-\begin{itemize}[noitemsep]
-    \item Unexperience. I was not able to correctly planificate the tasks, although I splitted them into smaller ones. I was sometimes stuck in some of them and others required less work load than expected.
-    \item Flexible project schedule. I was aware of my lack of experience and that I was going to fail in this task, so I tried to bring my deadline earlier so that I had more time.
-    \item Subjects: In my Erasmus University we had some subjects in which we studied in depth C-Sharp, ASP.NET core and React Native. I was not aware of it, so I replanificated my tasks related to this thesis so that I could work on them after studying the technology in the subject to gain time.
-    \item Uncertainties: Travels, plans, exams, deadline from the university, technical interviews...
-\end{itemize}
+Each sprint contained subtasks of the previous list and where associated with a milestone.
+Each milestone added value with respect to the previous one and was validated by my advisor.
 
-\section{Temporarization}
-In order to create my project schedule, I used Notion \cite{Notion}. You can check my planifications \href{https://cyclic-chiller-238.notion.site/LearnASL-60bb8f91ed8f4ccfa90f98ee2306403d}{here}. \\
+\section{Project schedule}
 
-\subsection{Theorical project schedule}
+In order to create my project schedule, I used Notion \cite{Notion}. Notion's schedule information can be checked \href{https://cyclic-chiller-238.notion.site/LearnASL-60bb8f91ed8f4ccfa90f98ee2306403d}{here}. \\
+
+\subsection{Initial project schedule (v0)}
 \begin{table}[H]
     \centering
     \resizebox{\textwidth}{!}{
@@ -77,14 +62,14 @@ In order to create my project schedule, I used Notion \cite{Notion}. You can che
         \hline
     \end{tabular}
     }
-\caption{Theorical project schedule}
+\caption{Initial project schedule - v0}
 \label{table:planification_theorical_project_schedule}
 \end{table}
 
-\subsection{Real project schedule}
-I changed the order of the milestones. I decided to develop the backend of the application first, instead of the frontend or implementing them in the same time. \\
+\subsection{Re-scheduling the project}
+I changed the order of the milestones (see table \ref{table:planification_real_v1}). I decided to develop the backend of the application first, instead of the frontend or implementing them in the same time. \\
 
-This decision was made because focusing on the same technology would allow me to go faster because I don't have to change the context and I was learning ASP.NET core in my  \\
+This decision was made because focusing on the same technology would allow me to go faster because I was learning ASP.NET core in my
 university, so I could ask my teachers for help and it also helped me to study. \\
 \begin{table}[H]
     \centering
@@ -105,14 +90,13 @@ university, so I could ask my teachers for help and it also helped me to study. 
         \hline
     \end{tabular}
     }
-\caption{Modification v1}
+\caption{Project schedule - v1}
 \label{table:planification_real_v1}
 \end{table}
 
-The next modification was made because I did not take into account the task of documenting what I was implementing, and I had to divide the task in \textit{Frontend} as well. \\
+The next modification (see table \ref{table:planification_real_v2}) was made because I did not take into account the task of documenting what I was implementing, and I had to subdivide the \textit{Frontend} task as well. \\
 
-Also, I underestimated how much time doing unit tests was going to take me. This was because in the subject we were going to learn them in depth, but we finally did not \\
-focused on one single framework, so I had to learnt it by myself. \\
+Also, I underestimated the time required to do unit tests as I had to learn about additional aspects by myself. \\
 \begin{table}[H]
     \centering
     \resizebox{\textwidth}{!}{
@@ -135,13 +119,12 @@ focused on one single framework, so I had to learnt it by myself. \\
         \hline
     \end{tabular}
     }
-\caption{Modification v2}
+\caption{Project schedule - v2}
 \label{table:planification_real_v2}
 \end{table}
 
-This modification was made due to a good new. Doing the unit tests, after learning the framework, did not take me that amount of time. \\
-
-Therefore, I modify the planification to rest some days and dedicate myself to design the app more days. \\
+The next modification (see table \ref{table:planification_real_v3}) was made because I overestimed the time required to learn the unit testing framework. This 
+allowed me to have some extra days devoted to rest and design the application. \\
 \begin{table}[H]
     \centering
     \resizebox{\textwidth}{!}{
@@ -164,15 +147,13 @@ Therefore, I modify the planification to rest some days and dedicate myself to d
         \hline
     \end{tabular}
     }
-\caption{Modification v3}
+\caption{Project schedule - v3}
 \label{table:planification_real_v3}
 \end{table}
 
-The next modification was made because the frontend task took me more than expected. I was working but I had a lot of uncertainties. \\
+The last re-scheduling (see table \ref{table:planification_real_v4}) was done because the frontend task took more than expected. I increased the priority of the deep learning model integration task. \\
 
-Because of this, I gave priority to integrating the deep learning model. This was the most risky task, due to my lask of knowledge on the field. \\
-
-In addition, I added some tasks, such as creating this document itself or improving the ai service. \\
+In addition, I added some tasks, such as creating this document itself or improving the AI (Artificial Intelligence) service. \\
 \begin{table}[H]
     \centering
     \resizebox{\textwidth}{!}{
@@ -200,26 +181,17 @@ In addition, I added some tasks, such as creating this document itself or improv
         \hline
     \end{tabular}
     }
-\caption{Modification v4}
+\caption{Project schedule - v4}
 \label{table:planification_real_v4}
 \end{table}
 
 Real TODO
+The following table shows the final task list of the project and the duration of each one.
 
 \section{Development monitoring}
-The communication was also synchronous, when we needed to have a conversation or show something from the app itself. \\
-
-All the meetings were made using Google Meet \cite{GMeet}. \\
-
-These meetings were made just when:
-\begin{itemize}[noitemsep]
-    \item There was a huge change in the app.
-    \item Literature review.
-    \item Diagrams review.
-    \item New 'iteration'. A huge value increase was made.
-\end{itemize}
-
-\subsection{Synchronous meetings}
+The communication with my advisor was both asynchronous (email) and synchronous (videoconferencing).
+When we needed to have a conversation or show a part of the application we scheduled meetings using Google Meet \cite{GMeet}.
+The meeting list is shown on table \ref{table:planification_sync}.
 \begin{table}[H]
     \centering
     \resizebox{\textwidth}{!}{
@@ -234,6 +206,7 @@ These meetings were made just when:
         \hline 2022, 03th, February     & Show the new features on the Backend. \\
         \hline 2022, 08th, March     & Diagrams, started frontend of the app. \\
         \hline 2022, 27th, April     & Show the new features on the Frontend. Paper review. Show the new first endpoint from the AI service. \\
+        \hline 2022, 15th, June & TODO \\
         \hline
     \end{tabular}
     }
