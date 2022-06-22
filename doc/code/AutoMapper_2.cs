@@ -1,0 +1,1 @@
+UserDto userDto = _mapper.Map<UserDto>(userEntity);

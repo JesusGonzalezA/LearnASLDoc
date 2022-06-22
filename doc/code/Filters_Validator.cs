@@ -1,4 +1,3 @@
-// Creating the filter
 public class LoginDtoValidator : AbstractValidator<LoginDto>
 {
     public LoginDtoValidator()
@@ -24,22 +23,5 @@ public class LoginDtoValidator : AbstractValidator<LoginDto>
         Regex symbol = new Regex("(\\W)+");
 
         return (lowercase.IsMatch(pw) && uppercase.IsMatch(pw) && digit.IsMatch(pw) && symbol.IsMatch(pw));
-    }
-}
-
-// Setting up the filter
-public static class ServiceCollectionExtensions {
-
-    public static IServiceCollection ConfigureValidators(this IServiceCollection services)
-    {
-        services.AddMvc(options =>
-        {
-            options.Filters.Add<ValidationFilter>();
-        }).AddFluentValidation();
-
-        services.AddTransient<IValidator<LoginDto>, LoginDtoValidator>();
-        // ... rest of validators
-
-        return services;
     }
 }
